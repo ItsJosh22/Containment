@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\bobis\\Desktop\\ShootingStar\\Server\\GameServer\\GameServer\\GameServer.csproj",
+      "projectUniqueName": "C:\\Users\\bobis\\Desktop\\TheShootingStar\\Server\\GameServer\\GameServer\\GameServer.csproj",
       "projectName": "GameServer",
-      "projectPath": "C:\\Users\\bobis\\Desktop\\ShootingStar\\Server\\GameServer\\GameServer\\GameServer.csproj",
+      "projectPath": "C:\\Users\\bobis\\Desktop\\TheShootingStar\\Server\\GameServer\\GameServer\\GameServer.csproj",
       "packagesPath": "C:\\Users\\bobis\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\bobis\\Desktop\\ShootingStar\\Server\\GameServer\\GameServer\\obj\\",
+      "outputPath": "C:\\Users\\bobis\\Desktop\\TheShootingStar\\Server\\GameServer\\GameServer\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\bobis\\AppData\\Roaming\\NuGet\\NuGet.Config",
