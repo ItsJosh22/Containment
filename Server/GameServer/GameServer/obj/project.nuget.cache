@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "dFbH+k0pMejf80N1q/IPEyhcX2gow8OcXy0lZRTAMiI+P4e7s3f2OOzhvb5LIHamE0Rdw148/REU0C6VsWYZ6A==",
+  "dgSpecHash": "0lsOkr7nx5AMmXLKVDfP3okE3ZbsWe13VhwsP54+vXPBxWFd0McQuHzzsUZjkHWF7gIDMzuNHDi5E/MALoEzGQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\bobis\\Desktop\\TheShootingStar\\Server\\GameServer\\GameServer\\GameServer.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\bobis\\.nuget\\packages\\system.numerics.vectors\\4.5.0\\system.numerics.vectors.4.5.0.nupkg.sha512"
+  ],
   "logs": []
 }
