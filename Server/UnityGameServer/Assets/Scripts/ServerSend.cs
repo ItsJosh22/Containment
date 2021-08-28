@@ -123,5 +123,105 @@ public class ServerSend
         }
     }
 
+
+    public static void PlayerDisconnected(int _playerId)
+    {
+        using (Packet _packet = new Packet((int)ServerPackets.playerDisconnected))
+        {
+            _packet.Write(_playerId);
+       
+
+            SendTCPDataToAll(_packet);
+        }
+    }
+
+    public static void PlayerHealth(Player _player)
+    {
+        using (Packet _packet = new Packet((int)ServerPackets.playerHealth))
+        {
+            _packet.Write(_player.id);
+            _packet.Write(_player.health);
+
+            SendTCPDataToAll(_packet);
+        }
+    }
+
+    public static void PlayerRespawned(Player _player)
+    {
+        using (Packet _packet = new Packet((int)ServerPackets.playerRespawned))
+        {
+            _packet.Write(_player.id);
+     
+
+            SendTCPDataToAll(_packet);
+        }
+    }
+
+    public static void CreateItemSpawner(int _toClient, int _spawnerId, Vector3 _spawnerPosition, bool _hasItem)
+    {
+        using (Packet _packet = new Packet((int)ServerPackets.createItemSpawner))
+        {
+            _packet.Write(_spawnerId);
+            _packet.Write(_spawnerPosition);
+            _packet.Write(_hasItem);
+
+            SendTCPData(_toClient,_packet);
+        }
+    }
+    public static void ItemSpawned(int _spawnerId)
+    {
+        using (Packet _packet = new Packet((int)ServerPackets.itemSpawned))
+        {
+            _packet.Write(_spawnerId);
+
+
+            SendTCPDataToAll(_packet);
+        }
+    }
+
+    public static void ItemPickedUp(int _spawnerId, int _byPlayer)
+    {
+        using (Packet _packet = new Packet((int)ServerPackets.itemPickedUp))
+        {
+            _packet.Write(_spawnerId);
+            _packet.Write(_byPlayer);
+
+            SendTCPDataToAll(_packet);
+        }
+    }
+
+    public static void SpawnProjectile(Projectile _projectile, int _thrownbyPlayer)
+    {
+        using (Packet _packet = new Packet((int)ServerPackets.spawnProjectile))
+        {
+            _packet.Write(_projectile.id);
+            _packet.Write(_projectile.transform.position);
+            _packet.Write(_thrownbyPlayer);
+            SendTCPDataToAll(_packet);
+        }
+    }
+
+    public static void ProjectilePosition(Projectile _projectile)
+    {
+        using (Packet _packet = new Packet((int)ServerPackets.projectilePosition))
+        {
+            _packet.Write(_projectile.id);
+            _packet.Write(_projectile.transform.position);
+
+            SendTCPDataToAll(_packet);
+        }
+    }
+
+    public static void ProjectileExploded(Projectile _projectile)
+    {
+        using (Packet _packet = new Packet((int)ServerPackets.projectileExploded))
+        {
+            _packet.Write(_projectile.id);
+            _packet.Write(_projectile.transform.position);
+
+            SendTCPDataToAll(_packet);
+        }
+    }
+
 }
 

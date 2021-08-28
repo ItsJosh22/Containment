@@ -46,4 +46,28 @@ public class ClientSend : MonoBehaviour
         }
     }
 
+    public static void PlayerShoot(Vector3 _facing)
+    {
+        using (Packet _packet = new Packet((int)ClientPackets.playerShoot))
+        {
+            _packet.Write(_facing);
+           
+
+            SendTCPData(_packet);
+        }
+    }
+
+
+    public static void PlayerThrowItem(Vector3 _facing)
+    {
+        using (Packet _packet = new Packet((int)ClientPackets.playerThrowItem))
+        {
+            _packet.Write(_facing);
+
+
+            SendTCPData(_packet);
+        }
+    }
+
+
 }

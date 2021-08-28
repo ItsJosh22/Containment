@@ -12,14 +12,18 @@ public class Player : MonoBehaviour
     public float moveSpeed = 5f;
     public float yVelo = 0;
     private bool[] inputs;
-
-
+    public Transform shootOrigin;
+    public float health;
+    public float maxHealth = 100f;
+    public int itemAmount = 0;
+    public int maxItemAmount = 3;
+    public float throwForce = 600f;
 
     public void Initialize(int _id, string _username)
     {
         id = _id;
         username = _username;
-
+        health = maxHealth;
         inputs = new bool[5];
     }
 
@@ -34,6 +38,10 @@ public class Player : MonoBehaviour
 
     public void FixedUpdate()
     {
+        if (health <= 0f)
+        {
+            return;
+        }
         Vector2 _inputDirection = Vector2.zero;
         if (inputs[0])
         {
@@ -83,5 +91,76 @@ public class Player : MonoBehaviour
         transform.rotation = _rotation;
     }
 
+    public void Shoot(Vector3 _viewDirection)
+    {
+        if (health <= 0)
+        {
+            return;
+        }
+
+        if (Physics.Raycast(shootOrigin.position,_viewDirection,out RaycastHit _hit,25f))
+        {
+            if (_hit.collider.CompareTag("Player"))
+            {
+                _hit.collider.GetComponent<Player>().TakeDamage(50f);
+            }
+
+
+        }
+    }
+
+    public void ThrowItem(Vector3 _viewDirection)
+    {
+        if (health <= 0)
+        {
+            return;
+        }
+
+        if (itemAmount > 0)
+        {
+            itemAmount--;
+            NetworkManager.instance.InstantiateProjectile(shootOrigin).Initialize(_viewDirection, throwForce, id);
+        }
+
+    }
+    public void TakeDamage(float _damage)
+    {
+        if (health <= 0f)
+        {
+            return;
+        }
+        health -= _damage;
+        if (health <= 0)
+        {
+            health = 0f;
+            controller.enabled = false;
+            transform.position = new Vector3(0, 10, 0);
+            ServerSend.PlayerPosition(this);
+            StartCoroutine(Respawn());
+        }
+
+        ServerSend.PlayerHealth(this);
+
+    }
+
+    private IEnumerator Respawn()
+    {
+        yield return new WaitForSeconds(3);
+        health = maxHealth;
+        controller.enabled = true;
+        ServerSend.PlayerRespawned(this);
+    }
+
+    public bool AttemptPickupItem()
+    {
+        if (itemAmount >= maxItemAmount)
+        {
+            return false;
+        }
+
+        itemAmount++;
+        return true;
+
+    }
 
 }

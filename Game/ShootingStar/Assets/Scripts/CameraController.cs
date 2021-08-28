@@ -19,7 +19,15 @@ public class CameraController : MonoBehaviour
 
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            ToggleCursorMode();
+        }
+        if (Cursor.lockState == CursorLockMode.Locked)
+        {
         Look();
+
+        }
         Debug.DrawRay(transform.position, transform.forward * 2, Color.green);
     }
 
@@ -39,5 +47,20 @@ public class CameraController : MonoBehaviour
     
     
     }
+
+    private void ToggleCursorMode()
+    {
+        Cursor.visible = !Cursor.visible;
+        if (Cursor.lockState == CursorLockMode.None)
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.None;
+        }
+    }
+
+
 
 }

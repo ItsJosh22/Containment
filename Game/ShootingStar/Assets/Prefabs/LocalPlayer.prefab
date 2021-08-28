@@ -147,6 +147,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 0
   username: 
+  Health: 0
+  maxHealth: 100
+  model: {fileID: 7531045079680756570}
 --- !u!114 &8749489990954424744
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -159,6 +162,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7330b141f9ca7c54eb0c6c1955aa13eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  camTransform: {fileID: 7706519935496450981}
 --- !u!1 &8995922940268422177
 GameObject:
   m_ObjectHideFlags: 0

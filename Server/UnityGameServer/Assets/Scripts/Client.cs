@@ -230,6 +230,13 @@ public class Client
 
             }
         }
+
+        foreach (ItemSpawner _itemSpawner in ItemSpawner.spawner.Values)
+        {
+            ServerSend.CreateItemSpawner(id, _itemSpawner.spawnerId, _itemSpawner.transform.position, _itemSpawner.hasItem);
+        }
+
+
     }
 
     void Disconnect()
@@ -246,6 +253,7 @@ public class Client
 
         tcp.Disconnect();
         udp.Disconnect();
+        ServerSend.PlayerDisconnected(id);
     }
 
 }

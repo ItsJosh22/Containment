@@ -11,6 +11,15 @@ public enum ServerPackets
     spawnPlayer,
     playerPosition,
     playerRotation,
+    playerDisconnect,
+    playerHealth,
+    playerRespawned,
+    createItemSpawner,
+    itemSpawned,
+    itemPickedUp,
+    spawnProjectile,
+    projectilePosition,
+    projectileExploded
 
 }
 
@@ -18,7 +27,9 @@ public enum ServerPackets
 public enum ClientPackets
 {
     welcomeReceived = 1,
-    playerMovement
+    playerMovement,
+    playerShoot,
+    playerThrowItem
 
 }
 
@@ -364,6 +375,7 @@ public class Packet : IDisposable
     {
         return new Quaternion(ReadFloat(_moveReadPos), ReadFloat(_moveReadPos), ReadFloat(_moveReadPos), ReadFloat(_moveReadPos));
     }
+
 
 
 
