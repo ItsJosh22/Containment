@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public Transform camTransform;
-
+   
 
     private void Update()
     {
@@ -21,6 +21,8 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        Debug.Log("Sending inputs");
+        
         SendInputToServer();
     }
 
@@ -34,9 +36,13 @@ public class PlayerController : MonoBehaviour
             Input.GetKey(KeyCode.D),
             Input.GetKey(KeyCode.Space),
         };
-
+        Debug.Log(_inputs[0]);
+        Debug.Log(_inputs[1]);
+        Debug.Log(_inputs[2]);
+        Debug.Log(_inputs[3]);
         ClientSend.PlayerMovement(_inputs);
     }
 
+    
 
 }
