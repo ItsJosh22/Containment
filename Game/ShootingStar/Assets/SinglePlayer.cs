@@ -30,6 +30,7 @@ public class SinglePlayer : MonoBehaviour
 
     public void Start()
     {
+        Application.targetFrameRate = 60;
         gravity *= Time.fixedDeltaTime * Time.fixedDeltaTime;
         moveSpeed *= Time.fixedDeltaTime;
         jumpspeed *= Time.fixedDeltaTime;
