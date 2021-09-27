@@ -39,6 +39,7 @@ public class SinglePlayer : MonoBehaviour
 
     public void FixedUpdate()
     {
+        
         if (health <= 0f)
         {
             return;
@@ -86,6 +87,8 @@ public class SinglePlayer : MonoBehaviour
         yVelo += gravity;
         _moveDirection.y = yVelo;
         controller.Move(_moveDirection);
+
+
 
     }
 
