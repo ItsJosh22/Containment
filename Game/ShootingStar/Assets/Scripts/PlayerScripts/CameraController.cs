@@ -15,6 +15,7 @@ public class CameraController : MonoBehaviour
     {
         verticalRotation = transform.localEulerAngles.x;
         horizontalRotation = player.transform.eulerAngles.y;
+        ToggleCursorMode();
     }
 
     private void Update()

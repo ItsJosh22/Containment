@@ -18,6 +18,7 @@ public class Player : MonoBehaviour
     public int itemAmount = 0;
     public int maxItemAmount = 3;
     public float throwForce = 600f;
+    public float BulletDamage = 50f;
 
     public void Initialize(int _id, string _username)
     {
@@ -102,7 +103,11 @@ public class Player : MonoBehaviour
         {
             if (_hit.collider.CompareTag("Player"))
             {
-                _hit.collider.GetComponent<Player>().TakeDamage(50f);
+                _hit.collider.GetComponent<Player>().TakeDamage(BulletDamage);
+            }
+            else if (_hit.collider.CompareTag("Enemy"))
+            {
+                _hit.collider.GetComponent<Enemy>().TakeDamage(BulletDamage);
             }
 
 

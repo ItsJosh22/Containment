@@ -10,6 +10,7 @@ public class UIManager : MonoBehaviour
     public GameObject startMenu;
     public InputField usernameField;
 
+
     private void Awake()
     {
         if (instance == null)
@@ -25,7 +26,7 @@ public class UIManager : MonoBehaviour
 
     public void ConnectToLocal()
     {
-        Client.instance.ip = "127.0.0.1";
+       // Client.instance.ip = "127.0.0.1";
         Debug.Log($"Trying to connect to {Client.instance.ip}");
         startMenu.SetActive(false);
         usernameField.interactable = false;
@@ -35,7 +36,7 @@ public class UIManager : MonoBehaviour
 
     public void ConnectToServer()
     {
-        Client.instance.ip = "24.170.248.139";
+        //Client.instance.ip = "24.170.248.139";
         Debug.Log($"Trying to connect to {Client.instance.ip}");
         startMenu.SetActive(false);
         usernameField.interactable = false;
