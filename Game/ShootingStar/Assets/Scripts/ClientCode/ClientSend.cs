@@ -69,5 +69,16 @@ public class ClientSend : MonoBehaviour
         }
     }
 
+    public static void PlayerSwapWeapon(bool _direction)
+    {
+        using (Packet _packet = new Packet((int)ClientPackets.playerSwapWeapon))
+        {
+            _packet.Write(_direction);
+
+
+            SendTCPData(_packet);
+        }
+    }
+
 
 }

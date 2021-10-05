@@ -1399,7 +1399,7 @@ MonoBehaviour:
   bulletsPerPress: 1
   bulletsLeft: 0
   allowButtonHold: 1
-  camera: {fileID: 1629099811}
+  Viewpoint: {fileID: 1785889592}
   bulletOrigin: {fileID: 913798228}
   Enemy:
     serializedVersion: 2
@@ -1684,11 +1684,6 @@ MonoBehaviour:
   CurrentPrimary: 0
   CurrentSecondary: 0
   cam: {fileID: 876752926}
---- !u!20 &1629099811 stripped
-Camera:
-  m_CorrespondingSourceObject: {fileID: 2546156279632794727, guid: d99933e510e33ef4c868b0be9d8deddd, type: 3}
-  m_PrefabInstance: {fileID: 1629099808}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1760215756
 GameObject:
   m_ObjectHideFlags: 0
@@ -1879,6 +1874,11 @@ Transform:
   m_Father: {fileID: 101274767}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1785889592 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 137775122164635591, guid: d99933e510e33ef4c868b0be9d8deddd, type: 3}
+  m_PrefabInstance: {fileID: 1629099808}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1820468234
 GameObject:
   m_ObjectHideFlags: 0

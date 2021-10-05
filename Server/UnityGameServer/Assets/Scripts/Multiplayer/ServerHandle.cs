@@ -48,4 +48,12 @@ public class ServerHandle
 
     }
 
+    public static void PlayerSwapWeapon(int _fromclient, Packet _packet)
+    {
+        bool SwapDirection = _packet.ReadBool();
+        Server.clients[_fromclient].player.SwapWeapon(SwapDirection);
+
+    }
+
+
 }

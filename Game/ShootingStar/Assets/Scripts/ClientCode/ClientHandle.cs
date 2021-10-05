@@ -163,4 +163,16 @@ public class ClientHandle : MonoBehaviour
         GameManager.enemies[_enemyId].SetHealth(_health);
 
     }
+
+    public static void SwapWep(Packet _packet)
+    {
+        int _id = _packet.ReadInt();
+        int currentWep = _packet.ReadInt();
+
+
+        GameManager.players[_id].SwapWeapon(currentWep);
+
+    }
+
+
 }

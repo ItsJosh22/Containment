@@ -21,7 +21,7 @@ public class GunLogic : MonoBehaviour
     bool shooting;
     bool canBeShot;
 
-    public Camera camera;
+    public GameObject Viewpoint;
     public Transform bulletOrigin;
     public RaycastHit hit;
     public LayerMask Enemy;
@@ -70,6 +70,7 @@ public class GunLogic : MonoBehaviour
         {
             bulletsShot = bulletsPerPress;
             Shoot();
+            ClientSend.PlayerShoot(Viewpoint.transform.forward);
         }
 
         if (Input.GetKeyDown(KeyCode.V))
@@ -84,19 +85,19 @@ public class GunLogic : MonoBehaviour
 
         float x = Random.Range(-spread, spread);
         float y = Random.Range(-spread, spread);
-        Vector3 direction = camera.transform.forward + new Vector3(0, y, x);
+        Vector3 direction = Viewpoint.transform.forward + new Vector3(0, y, x);
 
-        if (Physics.Raycast(camera.transform.position, direction, out hit, range))
+        if (Physics.Raycast(Viewpoint.transform.position, direction, out hit, range))
         {
-           
-            if (hit.collider.CompareTag("Enemy"))
-            {
-                //Call Enemies Damage func
-            }
+
+            //if (hit.collider.CompareTag("Enemy"))
+            //{
+            //    //Call Enemies Damage func
+            //}
         }
-        Debug.DrawLine(camera.transform.position, hit.point, Color.red,1000);
+        Debug.DrawLine(Viewpoint.transform.position, hit.point, Color.red,1000);
         // get object normal and make it face that
-         // Instantiate(bulletMark, hit.point, Quaternion.Euler(0, 180, 0));
+          Instantiate(bulletMark, hit.point, Quaternion.Euler(0, 180, 0));
         //  Instantiate(muzzleFlash, bulletOrigin.position,Quaternion.identity);
 
         bulletsLeft--;
