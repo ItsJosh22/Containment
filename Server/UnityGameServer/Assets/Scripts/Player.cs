@@ -110,13 +110,13 @@ public class Player : MonoBehaviour
         transform.rotation = _rotation;
     }
 
-    public void Shoot(Vector3 _viewDirection)
+    public void Shoot(Vector3 _viewDirection, int _bulletsPerPress)
     {
         if (health <= 0)
         {
             return;
         }
-
+        Guns[currentWep].GetComponent<GunLogic>().bulletsShot = _bulletsPerPress;
         Guns[currentWep].GetComponent<GunLogic>().Shoot(_viewDirection);
 
         //if (Physics.Raycast(shootOrigin.position,_viewDirection,out RaycastHit _hit,25f))
@@ -132,6 +132,11 @@ public class Player : MonoBehaviour
 
 
         //}
+    }
+
+    public void Reload()
+    {
+        Guns[currentWep].GetComponent<GunLogic>().Reload();
     }
 
     public void ThrowItem(Vector3 _viewDirection)

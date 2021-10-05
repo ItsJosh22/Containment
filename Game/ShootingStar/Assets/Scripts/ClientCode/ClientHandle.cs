@@ -175,4 +175,15 @@ public class ClientHandle : MonoBehaviour
     }
 
 
+    public static void Impact(Packet _packet)
+    {
+        Vector3 _pos = _packet.ReadVector3();
+        Quaternion _rot = _packet.ReadQuaternion();
+
+
+        GameManager.instance.Impact(_pos,_rot);
+
+    }
+
+
 }

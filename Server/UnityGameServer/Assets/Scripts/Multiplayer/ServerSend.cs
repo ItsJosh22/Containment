@@ -280,5 +280,17 @@ public class ServerSend
         }
     }
 
+    public static void Spawnimpact(Vector3 _pos,Quaternion _rot)
+    {
+        using (Packet _packet = new Packet((int)ServerPackets.spawnImpact))
+        {
+            _packet.Write(_pos);
+            _packet.Write(_rot);
+
+            SendTCPDataToAll(_packet);
+        }
+    }
+
+
 }
 

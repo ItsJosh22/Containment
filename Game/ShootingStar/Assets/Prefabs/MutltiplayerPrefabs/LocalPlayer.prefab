@@ -896,6 +896,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   camTransform: {fileID: 7706519935496450981}
+  pManager: {fileID: 2419202248992947936}
 --- !u!1 &7621387784692453035
 GameObject:
   m_ObjectHideFlags: 0

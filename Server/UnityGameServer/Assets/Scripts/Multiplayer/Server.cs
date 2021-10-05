@@ -133,6 +133,7 @@ public class Server
                  {(int)ClientPackets.playerShoot, ServerHandle.PlayerShoot },
                   {(int)ClientPackets.playerThrowItem, ServerHandle.PlayerThrowItem },
                    {(int)ClientPackets.playerSwapWeapon, ServerHandle.PlayerSwapWeapon },
+                    {(int)ClientPackets.playerReloaded, ServerHandle.PlayerReloaded },
 
 
 

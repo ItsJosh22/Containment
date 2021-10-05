@@ -14,7 +14,7 @@ public class GunLogic : MonoBehaviour
     [SerializeField] int magSize;
     [SerializeField] int bulletsPerPress;
     [SerializeField] int bulletsLeft;
-    int bulletsShot;
+    public int bulletsShot = 6;
 
     public bool allowButtonHold;
     bool reloading;
@@ -64,6 +64,7 @@ public class GunLogic : MonoBehaviour
         }
          Debug.DrawLine(Viewpoint.transform.position, hit.point, Color.red, 1000);
         // get object normal and make it face that
+        ServerSend.Spawnimpact(hit.point, Quaternion.Euler(0, 0, 0));
         // Instantiate(bulletMark, hit.point, Quaternion.Euler(0, 180, 0));
         //  Instantiate(muzzleFlash, bulletOrigin.position,Quaternion.identity);
 
@@ -74,7 +75,9 @@ public class GunLogic : MonoBehaviour
 
         if (bulletsShot > 0 && bulletsLeft > 0)
         {
-            Invoke("Shoot", rateOfFire);
+            StartCoroutine(rof());
+            // Invoke("Shoot", rateOfFire);
+            Shoot(_direction);
         }
 
 
@@ -85,7 +88,7 @@ public class GunLogic : MonoBehaviour
         canBeShot = true;
     }
 
-    void Reload()
+    public void Reload()
     {
         reloading = true;
         Invoke("Reloaded", reloadtime);
@@ -97,6 +100,10 @@ public class GunLogic : MonoBehaviour
       
     }
 
+    IEnumerator rof()
+    {
+        yield return new WaitForSeconds(rateOfFire);
+    }
 
 
 }

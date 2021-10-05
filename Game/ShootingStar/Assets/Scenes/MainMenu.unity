@@ -430,6 +430,7 @@ MonoBehaviour:
   itemSpawnerPrefab: {fileID: 2820215661797770215, guid: 98566ef8dc8939e499788a1d10afbc86, type: 3}
   projectilePrefab: {fileID: 2273858435989950685, guid: 0cd9af543dbaa284fa38184e3bbc381d, type: 3}
   enemyPrefab: {fileID: 6296771159204713951, guid: 03df8410ade8bd6488131d0262bed40a, type: 3}
+  impact: {fileID: 3218846459287747660, guid: e290792939c1d874c8b456c2baddff48, type: 3}
 --- !u!4 &400883156
 Transform:
   m_ObjectHideFlags: 0
@@ -774,7 +775,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!20 &963194227
 Camera:
   m_ObjectHideFlags: 0

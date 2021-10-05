@@ -46,12 +46,12 @@ public class ClientSend : MonoBehaviour
         }
     }
 
-    public static void PlayerShoot(Vector3 _facing)
+    public static void PlayerShoot(Vector3 _facing,int bulletsPerPress)
     {
         using (Packet _packet = new Packet((int)ClientPackets.playerShoot))
         {
             _packet.Write(_facing);
-           
+            _packet.Write(bulletsPerPress);
 
             SendTCPData(_packet);
         }
@@ -80,5 +80,14 @@ public class ClientSend : MonoBehaviour
         }
     }
 
+    public static void PlayerReloaded()
+    {
+        using (Packet _packet = new Packet((int)ClientPackets.playerReloaded))
+        {
+            
+
+            SendTCPData(_packet);
+        }
+    }
 
 }
