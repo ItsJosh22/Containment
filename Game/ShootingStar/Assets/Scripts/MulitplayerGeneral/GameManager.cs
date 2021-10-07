@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
     public GameObject itemSpawnerPrefab;
     public GameObject projectilePrefab;
     public GameObject enemyPrefab;
+    public GameObject impact;
     private void Awake()
     {
         if (instance == null)
@@ -66,6 +67,11 @@ public class GameManager : MonoBehaviour
         GameObject _enemy = Instantiate(enemyPrefab, _position, Quaternion.identity);
         _enemy.GetComponent<EnemyManager>().Initialize(_id);
         enemies.Add(_id, _enemy.GetComponent<EnemyManager>());
+    }
+
+    public void Impact(Vector3 _pos,Quaternion _rot)
+    {
+        Instantiate(impact, _pos, _rot);
     }
 
 }

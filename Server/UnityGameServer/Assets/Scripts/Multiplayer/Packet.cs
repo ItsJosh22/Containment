@@ -23,6 +23,9 @@ public enum ServerPackets
     spawnEnemy,
     enemyPosition,
     enemyHealth,
+    swapedWeapon,
+    playerReloaded,
+    spawnImpact,
 
 }
 
@@ -32,7 +35,9 @@ public enum ClientPackets
     welcomeReceived = 1,
     playerMovement,
     playerShoot,
-    playerThrowItem
+    playerThrowItem,
+    playerSwapWeapon,
+    playerReloaded
 
 }
 

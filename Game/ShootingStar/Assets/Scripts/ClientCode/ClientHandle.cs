@@ -159,8 +159,34 @@ public class ClientHandle : MonoBehaviour
     {
         int _enemyId = _packet.ReadInt();
         float _health = _packet.ReadFloat();
+        if (GameManager.enemies.TryGetValue(_enemyId,out EnemyManager e))
+        {
 
-        GameManager.enemies[_enemyId].SetHealth(_health);
+         e.SetHealth(_health);
+        }
 
     }
+
+    public static void SwapWep(Packet _packet)
+    {
+        int _id = _packet.ReadInt();
+        int currentWep = _packet.ReadInt();
+
+
+        GameManager.players[_id].SwapWeapon(currentWep);
+
+    }
+
+
+    public static void Impact(Packet _packet)
+    {
+        Vector3 _pos = _packet.ReadVector3();
+        Quaternion _rot = _packet.ReadQuaternion();
+
+
+        GameManager.instance.Impact(_pos,_rot);
+
+    }
+
+
 }

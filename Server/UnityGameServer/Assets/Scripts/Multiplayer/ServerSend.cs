@@ -268,5 +268,29 @@ public class ServerSend
             SendUDPDataToAll(_packet);
         }
     }
+
+    public static void PlayerSwapWeapon(Player _player)
+    {
+        using (Packet _packet = new Packet((int)ServerPackets.swapedWeapon))
+        {
+            _packet.Write(_player.id);
+            _packet.Write(_player.currentWep);
+
+            SendTCPDataToAll(_packet);
+        }
+    }
+
+    public static void Spawnimpact(Vector3 _pos,Quaternion _rot)
+    {
+        using (Packet _packet = new Packet((int)ServerPackets.spawnImpact))
+        {
+            _packet.Write(_pos);
+            _packet.Write(_rot);
+
+            SendTCPDataToAll(_packet);
+        }
+    }
+
+
 }
 

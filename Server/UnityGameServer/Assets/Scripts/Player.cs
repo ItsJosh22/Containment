@@ -20,12 +20,18 @@ public class Player : MonoBehaviour
     public float throwForce = 600f;
     public float BulletDamage = 50f;
 
+    [Header("Guns")]
+    public int currentWep = 1;
+    public GameObject[] Guns;
+    int wepAmount = 0;
+    bool running;
     public void Initialize(int _id, string _username)
     {
         id = _id;
         username = _username;
         health = maxHealth;
         inputs = new bool[5];
+        wepAmount = Guns.Length;
     }
 
 
@@ -39,6 +45,7 @@ public class Player : MonoBehaviour
 
     public void FixedUpdate()
     {
+        
         if (health <= 0f)
         {
             return;
@@ -60,7 +67,29 @@ public class Player : MonoBehaviour
         {
             _inputDirection.x += 1;
         }
+        if (inputs[5])
+        {
+            running = true;
+        }
+        else
+        {
+            running = false;
+        }
+
         Move(_inputDirection);
+
+        for (int i = 1; i < wepAmount ; i++)
+        {
+            if (i == currentWep)
+            {
+                Guns[i].SetActive(true);
+            }
+            else
+            {
+                Guns[i].SetActive(false);
+            }
+        }
+
     }
 
     private void Move(Vector2 _inputDirection)
@@ -68,7 +97,16 @@ public class Player : MonoBehaviour
    
 
         Vector3 _moveDirection = transform.right * _inputDirection.x + transform.forward * _inputDirection.y;
+        if (running)
+        {
+            
+            _moveDirection *= (moveSpeed * 2);
+        }
+        else
+        {
         _moveDirection *= moveSpeed;
+
+        }
 
         if (controller.isGrounded)
         {
@@ -92,26 +130,33 @@ public class Player : MonoBehaviour
         transform.rotation = _rotation;
     }
 
-    public void Shoot(Vector3 _viewDirection)
+    public void Shoot(Vector3 _viewDirection, int _bulletsPerPress)
     {
         if (health <= 0)
         {
             return;
         }
+        Guns[currentWep].GetComponent<GunLogic>().bulletsShot = _bulletsPerPress;
+        Guns[currentWep].GetComponent<GunLogic>().Shoot(_viewDirection);
 
-        if (Physics.Raycast(shootOrigin.position,_viewDirection,out RaycastHit _hit,25f))
-        {
-            if (_hit.collider.CompareTag("Player"))
-            {
-                _hit.collider.GetComponent<Player>().TakeDamage(BulletDamage);
-            }
-            else if (_hit.collider.CompareTag("Enemy"))
-            {
-                _hit.collider.GetComponent<Enemy>().TakeDamage(BulletDamage);
-            }
+        //if (Physics.Raycast(shootOrigin.position,_viewDirection,out RaycastHit _hit,25f))
+        //{
+        //    if (_hit.collider.CompareTag("Player"))
+        //    {
+        //        _hit.collider.GetComponent<Player>().TakeDamage(BulletDamage);
+        //    }
+        //    else if (_hit.collider.CompareTag("Enemy"))
+        //    {
+        //        _hit.collider.GetComponent<Enemy>().TakeDamage(BulletDamage);
+        //    }
 
 
-        }
+        //}
+    }
+
+    public void Reload()
+    {
+        Guns[currentWep].GetComponent<GunLogic>().Reload();
     }
 
     public void ThrowItem(Vector3 _viewDirection)
@@ -167,5 +212,30 @@ public class Player : MonoBehaviour
         return true;
 
     }
+
+    public void SwapWeapon(bool _direction)
+    {
+        if (_direction)
+        {
+            currentWep += 1;
+        }
+        else
+        {
+            currentWep -= 1;
+        }
+
+        if (currentWep > wepAmount -1)
+        {
+            currentWep = 0;
+        }
+
+        if (currentWep < 0)
+        {
+            currentWep = wepAmount-1;
+        }
+        ServerSend.PlayerSwapWeapon(this);
+    }
+
+
 
 }

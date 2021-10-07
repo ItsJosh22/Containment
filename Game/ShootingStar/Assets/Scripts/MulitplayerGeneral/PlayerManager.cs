@@ -12,11 +12,21 @@ public class PlayerManager : MonoBehaviour
     public MeshRenderer model;
     public bool isLocal;
     public Scrollbar Healthbar;
+
+    [Header("Weapons")]
+    public int currentWep = 1;
+    public GameObject[] Weapons;
+    int wepAmount = 0;
     public void Initialize(int _id,string _username)
     {
         id = _id;
         username = _username;
         Health = maxHealth;
+        wepAmount = Weapons.Length;
+        foreach ( GameObject w in Weapons)
+        {
+            w.SetActive(false);
+        }
         if (GetComponent<PlayerController>() == true)
         {
             isLocal = true;
@@ -25,6 +35,21 @@ public class PlayerManager : MonoBehaviour
         else
         {
             isLocal = false;
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        for (int i = 0; i < wepAmount ; i++)
+        {
+            if (i == currentWep)
+            {
+                Weapons[i].SetActive(true);
+            }
+            else
+            {
+                Weapons[i].SetActive(false);
+            }
         }
     }
 
@@ -42,6 +67,10 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
+    public void SwapWeapon(int CurrWep)
+    {
+        currentWep = CurrWep;
+    }
 
     public void Die()
     {
@@ -53,5 +82,10 @@ public class PlayerManager : MonoBehaviour
         model.enabled = true;
         SetHealth(maxHealth);
     }
+
+    
+
+
+
 
 }

@@ -75,7 +75,7 @@ MonoBehaviour:
   health: 0
   maxHealth: 100
   detectionRange: 30
-  shootRange: 5
+  shootRange: 6
   shootAccuracy: 0.1
   idleDuration: 1
   patrolDuration: 3
