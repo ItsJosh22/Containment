@@ -159,8 +159,11 @@ public class ClientHandle : MonoBehaviour
     {
         int _enemyId = _packet.ReadInt();
         float _health = _packet.ReadFloat();
+        if (GameManager.enemies.TryGetValue(_enemyId,out EnemyManager e))
+        {
 
-        GameManager.enemies[_enemyId].SetHealth(_health);
+         e.SetHealth(_health);
+        }
 
     }
 

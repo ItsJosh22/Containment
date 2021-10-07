@@ -21,9 +21,10 @@ public class Player : MonoBehaviour
     public float BulletDamage = 50f;
 
     [Header("Guns")]
-    public int currentWep = 0;
+    public int currentWep = 1;
     public GameObject[] Guns;
     int wepAmount = 0;
+    bool running;
     public void Initialize(int _id, string _username)
     {
         id = _id;
@@ -44,6 +45,7 @@ public class Player : MonoBehaviour
 
     public void FixedUpdate()
     {
+        
         if (health <= 0f)
         {
             return;
@@ -65,9 +67,18 @@ public class Player : MonoBehaviour
         {
             _inputDirection.x += 1;
         }
+        if (inputs[5])
+        {
+            running = true;
+        }
+        else
+        {
+            running = false;
+        }
+
         Move(_inputDirection);
 
-        for (int i = 0; i < wepAmount -1; i++)
+        for (int i = 1; i < wepAmount ; i++)
         {
             if (i == currentWep)
             {
@@ -86,7 +97,16 @@ public class Player : MonoBehaviour
    
 
         Vector3 _moveDirection = transform.right * _inputDirection.x + transform.forward * _inputDirection.y;
+        if (running)
+        {
+            
+            _moveDirection *= (moveSpeed * 2);
+        }
+        else
+        {
         _moveDirection *= moveSpeed;
+
+        }
 
         if (controller.isGrounded)
         {
@@ -204,14 +224,14 @@ public class Player : MonoBehaviour
             currentWep -= 1;
         }
 
-        if (currentWep > wepAmount)
+        if (currentWep > wepAmount -1)
         {
             currentWep = 0;
         }
 
         if (currentWep < 0)
         {
-            currentWep = wepAmount;
+            currentWep = wepAmount-1;
         }
         ServerSend.PlayerSwapWeapon(this);
     }

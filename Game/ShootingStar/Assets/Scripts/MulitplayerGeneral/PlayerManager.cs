@@ -14,7 +14,7 @@ public class PlayerManager : MonoBehaviour
     public Scrollbar Healthbar;
 
     [Header("Weapons")]
-    public int currentWep = 0;
+    public int currentWep = 1;
     public GameObject[] Weapons;
     int wepAmount = 0;
     public void Initialize(int _id,string _username)
@@ -40,7 +40,7 @@ public class PlayerManager : MonoBehaviour
 
     private void FixedUpdate()
     {
-        for (int i = 0; i < wepAmount -1; i++)
+        for (int i = 0; i < wepAmount ; i++)
         {
             if (i == currentWep)
             {

@@ -52,7 +52,7 @@ public class GunLogic : MonoBehaviour
 
         float x = Random.Range(-spread, spread);
         float y = Random.Range(-spread, spread);
-        Vector3 direction = _direction + new Vector3(0, y, x);
+        Vector3 direction = _direction + new Vector3(x, y, x);
 
         if (Physics.Raycast(Viewpoint.transform.position, direction, out hit, range))
         {

@@ -15,32 +15,26 @@ public class PlayerController : MonoBehaviour
         //}
         if (Input.GetKeyDown(KeyCode.Mouse1))
         {
-           // ClientSend.PlayerThrowItem(camTransform.forward);
+            // ClientSend.PlayerThrowItem(camTransform.forward);
         }
         if (Input.mouseScrollDelta.y < 0)
         {
             ClientSend.PlayerSwapWeapon(false);
-            if (pManager != null)
-            {
-                pManager.Weapons[pManager.currentWep].GetComponent<GunLogic>().ammocount.text = $"{pManager.Weapons[pManager.currentWep].GetComponent<GunLogic>().bulletsLeft} / {pManager.Weapons[pManager.currentWep].GetComponent<GunLogic>().magSize}";
-            }
 
         }
         if (Input.mouseScrollDelta.y > 0)
         {
             ClientSend.PlayerSwapWeapon(true);
-            if (pManager != null)
-            {
-                pManager.Weapons[pManager.currentWep].GetComponent<GunLogic>().ammocount.text = $"{pManager.Weapons[pManager.currentWep].GetComponent<GunLogic>().bulletsLeft} / {pManager.Weapons[pManager.currentWep].GetComponent<GunLogic>().magSize}";
-            }
+
         }
+        pManager.Weapons[pManager.currentWep].GetComponent<GunLogic>().ammocount.text = $"{pManager.Weapons[pManager.currentWep].GetComponent<GunLogic>().bulletsLeft} / {pManager.Weapons[pManager.currentWep].GetComponent<GunLogic>().magSize}";
 
     }
 
     private void FixedUpdate()
     {
-       // Debug.Log("Sending inputs");
-        
+        // Debug.Log("Sending inputs");
+
         SendInputToServer();
     }
 
@@ -53,12 +47,13 @@ public class PlayerController : MonoBehaviour
             Input.GetKey(KeyCode.A),
             Input.GetKey(KeyCode.D),
             Input.GetKey(KeyCode.Space),
-           
+            Input.GetKey(KeyCode.LeftShift),
+
         };
 
         ClientSend.PlayerMovement(_inputs);
     }
 
-    
+
 
 }

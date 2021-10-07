@@ -86,7 +86,7 @@ public class GunLogic : MonoBehaviour
 
         float x = Random.Range(-spread, spread);
         float y = Random.Range(-spread, spread);
-        Vector3 direction = Viewpoint.transform.forward + new Vector3(0, y, x);
+        Vector3 direction = Viewpoint.transform.forward + new Vector3(y, y, x);
 
 
         // Used only for debug

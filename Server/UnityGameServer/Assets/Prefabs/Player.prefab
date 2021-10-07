@@ -82,6 +82,7 @@ MonoBehaviour:
   magSize: 30
   bulletsPerPress: 1
   bulletsLeft: 0
+  bulletsShot: 6
   allowButtonHold: 0
   Viewpoint: {fileID: 5361046291266038717}
 --- !u!1 &5535593711308063988
@@ -148,7 +149,6 @@ MonoBehaviour:
   Guns:
   - {fileID: 5361046291266038717}
   - {fileID: 5649582425080336536}
-  - {fileID: 273465864134161726}
 --- !u!143 &7482713344782273815
 CharacterController:
   m_ObjectHideFlags: 0
@@ -219,6 +219,7 @@ MonoBehaviour:
   magSize: 24
   bulletsPerPress: 6
   bulletsLeft: 0
+  bulletsShot: 6
   allowButtonHold: 0
   Viewpoint: {fileID: 5649582425080336536}
 --- !u!1 &6945709199424093135
