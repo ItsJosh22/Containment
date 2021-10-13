@@ -311,7 +311,7 @@ public class Client : MonoBehaviour
         Debug.Log("Initalized Packets");
     }
 
-    void Disconnect()
+    public void Disconnect()
     {
         if (isConnected)
         {
