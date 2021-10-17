@@ -61,13 +61,13 @@ public class GunLogic : MonoBehaviour
             shooting = Input.GetKeyDown(KeyCode.Mouse0);
         }
 
-        if (Input.GetKeyDown(KeyCode.R) && bulletsLeft < magSize && !reloading)
+        if (Input.GetKeyDown(KeyCode.R) && bulletsLeft < magSize && !reloading && Cursor.lockState == CursorLockMode.Locked)
         {
             Reload();
             ClientSend.PlayerReloaded();
         }
 
-        if (canBeShot && shooting && !reloading && bulletsLeft > 0)
+        if (canBeShot && shooting && !reloading && bulletsLeft > 0 && Cursor.lockState == CursorLockMode.Locked)
         {
             bulletsShot = bulletsPerPress;
             Shoot();

@@ -34,8 +34,11 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         // Debug.Log("Sending inputs");
-
+        if (Cursor.lockState == CursorLockMode.Locked)
+        {
         SendInputToServer();
+
+        }
     }
 
     void SendInputToServer()

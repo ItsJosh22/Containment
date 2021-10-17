@@ -27,6 +27,7 @@ public class PauseMenu : MonoBehaviour
                 Cursor.lockState = CursorLockMode.None;
                 PlayerUI.SetActive( false);
                 Pausemenu.SetActive(true);
+
             }
             else
             {
@@ -34,6 +35,8 @@ public class PauseMenu : MonoBehaviour
                 Cursor.lockState = CursorLockMode.Locked;
                 PlayerUI.SetActive(true);
                 Pausemenu.SetActive(false);
+                ServerWindow.SetActive(false);
+                OptionsMenu.SetActive(false);
             }
         }
     }
@@ -43,6 +46,8 @@ public class PauseMenu : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         PlayerUI.SetActive(true);
         Pausemenu.SetActive(false);
+        ServerWindow.SetActive(false);
+        OptionsMenu.SetActive(false);
     }
     public void Options()
     {
@@ -56,7 +61,7 @@ public class PauseMenu : MonoBehaviour
     {
         Client.instance.Disconnect();
        
-        Destroy(this.gameObject);
+        Destroy(this.transform.parent.gameObject);
     }    
 
 }
