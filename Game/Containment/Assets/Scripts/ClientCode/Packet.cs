@@ -38,7 +38,7 @@ public enum ClientPackets
     playerThrowItem,
     playerSwapWeapon,
     playerReloaded,
-
+    changeLevel
 
 }
 

@@ -248,8 +248,12 @@ public class Client
 
         ThreadManager.ExecuteOnMainThread(() =>
         {
+            if (player.gameObject != null)
+            {
             UnityEngine.Object.Destroy(player.gameObject);
             player = null;
+
+            }
         });
 
 

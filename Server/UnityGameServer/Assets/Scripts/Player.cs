@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using System;
 public class Player : MonoBehaviour
 {
     public int id;
@@ -20,6 +20,8 @@ public class Player : MonoBehaviour
     public float throwForce = 600f;
     public float BulletDamage = 50f;
 
+    public GameObject[] Allpoints;
+    public GameObject spawnPoint;
     [Header("Guns")]
     public int currentWep = 1;
     public GameObject[] Guns;
@@ -32,14 +34,37 @@ public class Player : MonoBehaviour
         health = maxHealth;
         inputs = new bool[5];
         wepAmount = Guns.Length;
+        Allpoints = GameObject.FindGameObjectsWithTag("SpawnPoint");
+        Array.Sort(Allpoints, SpawnpointSort);
+        for (int i = 0; i < Allpoints.Length; i++)
+        {
+            if (Allpoints[i].GetComponent<SpawnPoint>().taken == false)
+            {
+                Allpoints[i].GetComponent<SpawnPoint>().taken = true;
+                Allpoints[i].GetComponent<SpawnPoint>().playerID = id;
+                spawnPoint = Allpoints[i];
+                transform.position = spawnPoint.transform.position;
+                break;
+            }
+        }
     }
 
+    private void OnDestroy()
+    {
+        if (spawnPoint != null)
+        {
+
+        spawnPoint.GetComponent<SpawnPoint>().playerLeft();
+        }
+    }
 
     public void Start()
     {
         gravity *= Time.fixedDeltaTime * Time.fixedDeltaTime;
         moveSpeed *= Time.fixedDeltaTime;
         jumpspeed *= Time.fixedDeltaTime;
+       
+        
     }
 
 
@@ -184,7 +209,7 @@ public class Player : MonoBehaviour
         {
             health = 0f;
             controller.enabled = false;
-            transform.position = new Vector3(0, 10, 0);
+            transform.position = spawnPoint.transform.position;
             ServerSend.PlayerPosition(this);
             StartCoroutine(Respawn());
         }
@@ -236,6 +261,9 @@ public class Player : MonoBehaviour
         ServerSend.PlayerSwapWeapon(this);
     }
 
-
+    int SpawnpointSort(GameObject a, GameObject b)
+    {
+        return a.name.CompareTo(b.name);
+    }
 
 }

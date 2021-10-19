@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public class PauseMenu : MonoBehaviour
 {
     public GameObject PlayerUI;
@@ -62,6 +62,12 @@ public class PauseMenu : MonoBehaviour
         Client.instance.Disconnect();
        
         Destroy(this.transform.parent.gameObject);
-    }    
+    }
 
+    public void ChangeLevel()
+    {
+      
+    }
+
+  
 }

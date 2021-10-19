@@ -37,8 +37,8 @@ public enum ClientPackets
     playerShoot,
     playerThrowItem,
     playerSwapWeapon,
-    playerReloaded
-
+    playerReloaded,
+    changeLevel
 }
 
 public class Packet : IDisposable

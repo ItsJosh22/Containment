@@ -11,12 +11,15 @@ public class GameManager : MonoBehaviour
     public static Dictionary<int, ItemSpawner> itemSpawners = new Dictionary<int, ItemSpawner>();
     public static Dictionary<int, ProjectileManager> projectiles = new Dictionary<int, ProjectileManager>();
     public static Dictionary<int, EnemyManager> enemies = new Dictionary<int, EnemyManager>();
+
     public GameObject localPlayerPrefab;
     public GameObject playerPrefab;
     public GameObject itemSpawnerPrefab;
+    
     public GameObject projectilePrefab;
     public GameObject enemyPrefab;
     public GameObject impact;
+
     private void Awake()
     {
         if (instance == null)
@@ -27,7 +30,7 @@ public class GameManager : MonoBehaviour
         {
             Destroy(this);
         }
-
+       
     }
 
 
@@ -73,5 +76,8 @@ public class GameManager : MonoBehaviour
     {
         Instantiate(impact, _pos, _rot);
     }
+
+  
+
 
 }

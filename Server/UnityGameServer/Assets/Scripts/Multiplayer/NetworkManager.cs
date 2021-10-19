@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public class NetworkManager : MonoBehaviour
 {
     public static NetworkManager instance;
@@ -28,7 +28,7 @@ public class NetworkManager : MonoBehaviour
         QualitySettings.vSyncCount = 0;
         Application.targetFrameRate = 30;
 
-        Server.Start(50, 42050);
+        Server.Start(4, 42050);
 
     }
     private void OnApplicationQuit()
@@ -39,7 +39,7 @@ public class NetworkManager : MonoBehaviour
 
     public Player InstantiatePlayer()
     {
-        return Instantiate(playerPrefab, new Vector3(0f,0.5f,0f),Quaternion.identity).GetComponent<Player>();
+        return Instantiate(playerPrefab, new Vector3(0f,0,0f),Quaternion.identity).GetComponent<Player>();
     }
 
 
@@ -54,5 +54,6 @@ public class NetworkManager : MonoBehaviour
         return Instantiate(projectilePrefab, _shootOrigin.position + _shootOrigin.forward * 0.7f, Quaternion.identity).GetComponent<Projectile>();
     }
 
+   
 
 }

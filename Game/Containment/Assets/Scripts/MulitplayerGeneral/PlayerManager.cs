@@ -79,12 +79,13 @@ public class PlayerManager : MonoBehaviour
 
     public void Respawn()
     {
+               
         model.enabled = true;
         SetHealth(maxHealth);
+
     }
 
-    
-
+   
 
 
 

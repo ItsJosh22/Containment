@@ -4,7 +4,7 @@ using UnityEngine;
 using System;
 using System.Net;
 using System.Net.Sockets;
-
+using UnityEngine.SceneManagement;
 public class Client : MonoBehaviour
 {
     public static Client instance;
@@ -311,6 +311,7 @@ public class Client : MonoBehaviour
         Debug.Log("Initalized Packets");
     }
 
+   
     public void Disconnect()
     {
         if (isConnected)
@@ -323,4 +324,5 @@ public class Client : MonoBehaviour
         }
     }
 
+    
 }

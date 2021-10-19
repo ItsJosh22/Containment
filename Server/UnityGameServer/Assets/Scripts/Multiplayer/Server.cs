@@ -5,7 +5,7 @@ using System.Net;
 using System.Net.Sockets;
 using System;
 
-public class Server 
+public class Server
 {
     public static int MaxPlayers { get; private set; }
 
@@ -129,11 +129,12 @@ public class Server
         packetHandlers = new Dictionary<int, PacketHandler>()
             {
                 {(int)ClientPackets.welcomeReceived, ServerHandle.WelcomeReceived },
-                 {(int)ClientPackets.playerMovement, ServerHandle.PlayerMovement },
-                 {(int)ClientPackets.playerShoot, ServerHandle.PlayerShoot },
-                  {(int)ClientPackets.playerThrowItem, ServerHandle.PlayerThrowItem },
-                   {(int)ClientPackets.playerSwapWeapon, ServerHandle.PlayerSwapWeapon },
-                    {(int)ClientPackets.playerReloaded, ServerHandle.PlayerReloaded },
+                {(int)ClientPackets.playerMovement, ServerHandle.PlayerMovement },
+                {(int)ClientPackets.playerShoot, ServerHandle.PlayerShoot },
+                {(int)ClientPackets.playerThrowItem, ServerHandle.PlayerThrowItem },
+                {(int)ClientPackets.playerSwapWeapon, ServerHandle.PlayerSwapWeapon },
+                {(int)ClientPackets.playerReloaded, ServerHandle.PlayerReloaded },
+       
 
 
 
