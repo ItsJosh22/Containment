@@ -291,6 +291,28 @@ public class ServerSend
         }
     }
 
+    public static void LevelChanging(string _levelname)
+    {
+        using (Packet _packet = new Packet((int)ServerPackets.levelChanging))
+        {
+            _packet.Write(_levelname);
+           
+
+            SendTCPDataToAll(_packet);
+        }
+    }
+
+    public static void ClientLevelChange(bool approved)
+    {
+        using (Packet _packet = new Packet((int)ServerPackets.ClientLevelChange))
+        {
+         //   _packet.Write(approved);
+
+
+            SendTCPDataToAll(_packet);
+        }
+    }
+
 
 }
 

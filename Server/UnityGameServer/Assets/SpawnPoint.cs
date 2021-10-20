@@ -12,7 +12,7 @@ public class SpawnPoint : MonoBehaviour
     {
         taken = false;
         playerID = 0;
-
+        Spawnpointdata.instance.UpdateSpawnpoints();
     }
 
 

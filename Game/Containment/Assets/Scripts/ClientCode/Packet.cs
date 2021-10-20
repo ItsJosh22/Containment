@@ -25,7 +25,9 @@ public enum ServerPackets
     enemyHealth,
     swapedWeapon,
     playerReloaded,
-    spawnImpact
+    spawnImpact,
+    levelChanging,
+    ClientLevelChange
 
 }
 

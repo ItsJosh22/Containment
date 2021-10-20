@@ -187,6 +187,23 @@ public class ClientHandle : MonoBehaviour
         GameManager.instance.Impact(_pos,_rot);
 
     }
+    public static void LevelChanging(Packet _packet)
+    {
+        string _levelname = _packet.ReadString();
+        
 
 
+        SceneChanger.instance.leveltoChange(_levelname);
+
+    }
+
+    public static void ClientlevelChange(Packet _packet)
+    {
+        //   Vector3 _pos = _packet.ReadVector3();
+        //Quaternion _rot = _packet.ReadQuaternion();
+
+
+        SceneChanger.instance.Changing();
+
+    }
 }

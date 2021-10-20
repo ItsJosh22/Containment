@@ -43,11 +43,21 @@ public class Player : MonoBehaviour
                 Allpoints[i].GetComponent<SpawnPoint>().taken = true;
                 Allpoints[i].GetComponent<SpawnPoint>().playerID = id;
                 spawnPoint = Allpoints[i];
-                transform.position = spawnPoint.transform.position;
+                MoveToSpawn();
+                Spawnpointdata.instance.UpdateSpawnpoints();
                 break;
             }
         }
     }
+
+    private void OnLevelWasLoaded(int level)
+    {
+        controller.enabled = false;
+        Debug.Log("Called");
+        MoveToSpawn();
+        controller.enabled = true;
+    }
+
 
     private void OnDestroy()
     {
@@ -164,19 +174,7 @@ public class Player : MonoBehaviour
         Guns[currentWep].GetComponent<GunLogic>().bulletsShot = _bulletsPerPress;
         Guns[currentWep].GetComponent<GunLogic>().Shoot(_viewDirection);
 
-        //if (Physics.Raycast(shootOrigin.position,_viewDirection,out RaycastHit _hit,25f))
-        //{
-        //    if (_hit.collider.CompareTag("Player"))
-        //    {
-        //        _hit.collider.GetComponent<Player>().TakeDamage(BulletDamage);
-        //    }
-        //    else if (_hit.collider.CompareTag("Enemy"))
-        //    {
-        //        _hit.collider.GetComponent<Enemy>().TakeDamage(BulletDamage);
-        //    }
-
-
-        //}
+       
     }
 
     public void Reload()
@@ -259,6 +257,11 @@ public class Player : MonoBehaviour
             currentWep = wepAmount-1;
         }
         ServerSend.PlayerSwapWeapon(this);
+    }
+
+    public void MoveToSpawn()
+    {
+        transform.position = spawnPoint.transform.position;
     }
 
     int SpawnpointSort(GameObject a, GameObject b)

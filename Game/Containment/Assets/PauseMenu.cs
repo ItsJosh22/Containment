@@ -9,7 +9,25 @@ public class PauseMenu : MonoBehaviour
     public GameObject OptionsMenu;
     public GameObject ServerWindow;
 
-    
+    public GameObject Loadscreen;
+
+
+    public static PauseMenu instance;
+    private void Awake()
+    {
+
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else if (instance != this)
+        {
+            Destroy(this);
+        }
+
+
+    }
+
     private void Start()
     {
         ServerWindow.SetActive(false);
@@ -64,10 +82,14 @@ public class PauseMenu : MonoBehaviour
         Destroy(this.transform.parent.gameObject);
     }
 
-    public void ChangeLevel()
+    public void StartChange()
     {
-      
+        Loadscreen.SetActive(true);
     }
 
+    public void FinishChange()
+    {
+        Loadscreen.SetActive(false);
+    }
   
 }

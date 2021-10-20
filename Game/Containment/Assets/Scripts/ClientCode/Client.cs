@@ -306,6 +306,8 @@ public class Client : MonoBehaviour
             {(int)ServerPackets.enemyHealth, ClientHandle.EnemyHealth },
             {(int)ServerPackets.swapedWeapon, ClientHandle.SwapWep },
             {(int)ServerPackets.spawnImpact, ClientHandle.Impact },
+                        {(int)ServerPackets.levelChanging, ClientHandle.LevelChanging },
+                  {(int)ServerPackets.ClientLevelChange, ClientHandle.ClientlevelChange },
 
         };
         Debug.Log("Initalized Packets");
