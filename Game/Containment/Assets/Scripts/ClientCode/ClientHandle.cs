@@ -147,7 +147,7 @@ public class ClientHandle : MonoBehaviour
     {
         int _enemyId = _packet.ReadInt();
         Vector3 _position = _packet.ReadVector3();
-        if (GameManager.enemies.TryGetValue(_enemyId, out EnemyManager _enemy))
+        if (GameManager.enemies.TryGetValue(_enemyId, out EnemyManager _enemy) && _enemy != null)
         {
 
              _enemy.transform.position = _position;

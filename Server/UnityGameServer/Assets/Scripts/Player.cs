@@ -50,13 +50,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void OnLevelWasLoaded(int level)
-    {
-        controller.enabled = false;
-        Debug.Log("Called");
-        MoveToSpawn();
-        controller.enabled = true;
-    }
+
 
 
     private void OnDestroy()
@@ -261,7 +255,10 @@ public class Player : MonoBehaviour
 
     public void MoveToSpawn()
     {
+        controller.enabled = false;
+  
         transform.position = spawnPoint.transform.position;
+        controller.enabled = true;
     }
 
     int SpawnpointSort(GameObject a, GameObject b)

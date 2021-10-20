@@ -78,6 +78,11 @@ public class Spawnpointdata : MonoBehaviour
             }
         }
 
+        for (int i = 0; i < players.Length; i++)
+        {
+            players[i].GetComponent<Player>().MoveToSpawn();
+        }
+
         currentspawns = newSpawns;
 
     }
