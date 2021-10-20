@@ -17,6 +17,11 @@ public class PlayerController : MonoBehaviour
         {
             // ClientSend.PlayerThrowItem(camTransform.forward);
         }
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+
+            ClientSend.PlayerFlashLight();
+        }
         if (Input.mouseScrollDelta.y < 0)
         {
             ClientSend.PlayerSwapWeapon(false);

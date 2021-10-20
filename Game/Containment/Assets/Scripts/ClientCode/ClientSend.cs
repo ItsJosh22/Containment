@@ -90,6 +90,13 @@ public class ClientSend : MonoBehaviour
         }
     }
 
-   
+    public static void PlayerFlashLight()
+    {
+        using (Packet _packet = new Packet((int)ClientPackets.playerFlashLight))
+        {
+            
+            SendTCPData(_packet);
+        }
+    }
 
 }

@@ -134,8 +134,8 @@ public class Server
                 {(int)ClientPackets.playerThrowItem, ServerHandle.PlayerThrowItem },
                 {(int)ClientPackets.playerSwapWeapon, ServerHandle.PlayerSwapWeapon },
                 {(int)ClientPackets.playerReloaded, ServerHandle.PlayerReloaded },
-       
 
+                {(int)ClientPackets.playerFlashLight, ServerHandle.PlayerFlashlight },
 
 
             };

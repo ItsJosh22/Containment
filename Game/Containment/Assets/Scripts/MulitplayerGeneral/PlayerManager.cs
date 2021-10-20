@@ -17,6 +17,10 @@ public class PlayerManager : MonoBehaviour
     public int currentWep = 1;
     public GameObject[] Weapons;
     int wepAmount = 0;
+
+    [Header("FlashLight")]
+    public GameObject Flashlight;
+    
     public void Initialize(int _id,string _username)
     {
         id = _id;
@@ -51,7 +55,11 @@ public class PlayerManager : MonoBehaviour
                 Weapons[i].SetActive(false);
             }
         }
+
+        
+
     }
+   
 
     public void SetHealth(float _health)
     {
@@ -86,7 +94,10 @@ public class PlayerManager : MonoBehaviour
     }
 
    
-
+    public void EnableFlashLight()
+    {
+        Flashlight.SetActive(!Flashlight.activeSelf);
+    }
 
 
 }

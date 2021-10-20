@@ -27,6 +27,8 @@ public class Player : MonoBehaviour
     public GameObject[] Guns;
     int wepAmount = 0;
     bool running;
+    [Header("Flashlight")]
+    public GameObject flashlight;
     public void Initialize(int _id, string _username)
     {
         id = _id;
@@ -261,6 +263,12 @@ public class Player : MonoBehaviour
         controller.enabled = true;
     }
 
+    public void EnableFlashlight()
+    {
+        flashlight.SetActive(!flashlight.activeSelf);
+        ServerSend.PlayerFlashlight(id);
+    }
+    
     int SpawnpointSort(GameObject a, GameObject b)
     {
         return a.name.CompareTo(b.name);

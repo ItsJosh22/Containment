@@ -63,5 +63,10 @@ public class ServerHandle
 
     }
 
-   
+    public static void PlayerFlashlight(int _fromclient, Packet _packet)
+    {
+
+        Server.clients[_fromclient].player.EnableFlashlight();
+
+    }
 }

@@ -206,4 +206,13 @@ public class ClientHandle : MonoBehaviour
         SceneChanger.instance.Changing();
 
     }
+
+    public static void PlayerFlashlight(Packet _packet)
+    {
+        int id = _packet.ReadInt();
+
+
+        GameManager.players[id].EnableFlashLight();
+
+    }
 }

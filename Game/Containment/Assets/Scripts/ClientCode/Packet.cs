@@ -27,7 +27,8 @@ public enum ServerPackets
     playerReloaded,
     spawnImpact,
     levelChanging,
-    ClientLevelChange
+    ClientLevelChange,
+    playerFlashLight
 
 }
 
@@ -40,7 +41,8 @@ public enum ClientPackets
     playerThrowItem,
     playerSwapWeapon,
     playerReloaded,
-    changeLevel
+    changeLevel,
+    playerFlashLight
 
 }
 

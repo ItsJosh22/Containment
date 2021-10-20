@@ -308,6 +308,7 @@ public class Client : MonoBehaviour
             {(int)ServerPackets.spawnImpact, ClientHandle.Impact },
                         {(int)ServerPackets.levelChanging, ClientHandle.LevelChanging },
                   {(int)ServerPackets.ClientLevelChange, ClientHandle.ClientlevelChange },
+                  {(int)ServerPackets.playerFlashLight, ClientHandle.PlayerFlashlight },
 
         };
         Debug.Log("Initalized Packets");

@@ -313,6 +313,16 @@ public class ServerSend
         }
     }
 
+    public static void PlayerFlashlight(int id)
+    {
+        using (Packet _packet = new Packet((int)ServerPackets.playerFlashLight))
+        {
+            _packet.Write(id);
+           
+
+            SendTCPDataToAll(_packet);
+        }
+    }
 
 }
 
