@@ -136,6 +136,7 @@ public class Server
                 {(int)ClientPackets.playerReloaded, ServerHandle.PlayerReloaded },
 
                 {(int)ClientPackets.playerFlashLight, ServerHandle.PlayerFlashlight },
+                 {(int)ClientPackets.doorInteracted, ServerHandle.DoorInteracted },
 
 
             };

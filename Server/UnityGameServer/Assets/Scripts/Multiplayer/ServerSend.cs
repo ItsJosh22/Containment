@@ -324,5 +324,17 @@ public class ServerSend
         }
     }
 
+    public static void DoorInteracted(int id,bool activated)
+    {
+        using (Packet _packet = new Packet((int)ServerPackets.doorInteracted))
+        {
+            _packet.Write(id);
+            _packet.Write(activated);
+
+            SendTCPDataToAll(_packet);
+        }
+    }
+
+
 }
 

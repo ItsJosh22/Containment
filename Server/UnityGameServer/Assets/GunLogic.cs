@@ -61,6 +61,10 @@ public class GunLogic : MonoBehaviour
             {
                 hit.collider.GetComponent<Enemy>().TakeDamage(damage);
             }
+            if (hit.collider.CompareTag("Player"))
+            {
+                hit.collider.GetComponent<Player>().TakeDamage(damage);
+            }
         }
          Debug.DrawLine(Viewpoint.transform.position, hit.point, Color.red, 1000);
         // get object normal and make it face that

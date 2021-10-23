@@ -213,6 +213,16 @@ public class ClientHandle : MonoBehaviour
 
 
         GameManager.players[id].EnableFlashLight();
+        
+    }
+
+    public static void DoorInteracted(Packet _packet)
+    {
+        int id = _packet.ReadInt();
+        bool activated = _packet.ReadBool();
+
+        InteractionHolder.instance.doors[id].DoorInter(activated);
 
     }
+
 }

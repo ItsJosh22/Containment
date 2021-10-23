@@ -99,4 +99,14 @@ public class ClientSend : MonoBehaviour
         }
     }
 
+    public static void DoorInteracted(int _id, bool _state)
+    {
+        using (Packet _packet = new Packet((int)ClientPackets.doorInteracted))
+        {
+            _packet.Write(_id);
+            _packet.Write(_state);
+
+            SendTCPData(_packet);
+        }
+    }
 }

@@ -69,4 +69,18 @@ public class ServerHandle
         Server.clients[_fromclient].player.EnableFlashlight();
 
     }
+
+    public static void DoorInteracted(int _fromclient, Packet _packet)
+    {
+
+        int _doorID = _packet.ReadInt();
+        bool _activated = _packet.ReadBool();
+
+        InteractionHolder.instance.doors[_doorID].doorInteracted(_activated);
+
+    }
+
+
+
+
 }
