@@ -335,6 +335,26 @@ public class ServerSend
         }
     }
 
+    public static void PlayerPickedupWeapon(int _wepid, int  _playerId)
+    {
+        using (Packet _packet = new Packet((int)ServerPackets.PlayerPickedupGun))
+        {
+            _packet.Write(_wepid);
+            _packet.Write(_playerId);
+
+            SendTCPDataToAll(_packet);
+        }
+    }
+    public static void FreeWeapon(int _wepid)
+    {
+        using (Packet _packet = new Packet((int)ServerPackets.FreeWeapon))
+        {
+            _packet.Write(_wepid);
+
+
+            SendTCPDataToAll(_packet);
+        }
+    }
 
 }
 

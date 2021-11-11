@@ -12,12 +12,15 @@ public class PlayerManager : MonoBehaviour
     public MeshRenderer model;
     public bool isLocal;
     public Scrollbar Healthbar;
-
+    public GameObject shootOrigin;
     [Header("Weapons")]
+    [Range(0,1)]
     public int currentWep = 1;
-    public GameObject[] Weapons;
-    int wepAmount = 0;
 
+    public GameObject Primary;
+    public GameObject Secondary;
+
+    public Transform gunPos;
     [Header("FlashLight")]
     public GameObject Flashlight;
     
@@ -26,11 +29,8 @@ public class PlayerManager : MonoBehaviour
         id = _id;
         username = _username;
         Health = maxHealth;
-        wepAmount = Weapons.Length;
-        foreach ( GameObject w in Weapons)
-        {
-            w.SetActive(false);
-        }
+        
+       
         if (GetComponent<PlayerController>() == true)
         {
             isLocal = true;
@@ -40,23 +40,51 @@ public class PlayerManager : MonoBehaviour
         {
             isLocal = false;
         }
+        Primary = null;
+        Secondary = null;
     }
 
     private void FixedUpdate()
     {
-        for (int i = 0; i < wepAmount ; i++)
+
+        if (Primary == null && Secondary == null)
         {
-            if (i == currentWep)
+            return;
+        }
+        else
+        {
+            if (Primary != null && Secondary == null)
             {
-                Weapons[i].SetActive(true);
+                currentWep = 2;
             }
-            else
+            if (Secondary != null && Primary == null)
             {
-                Weapons[i].SetActive(false);
+                currentWep = 3;
             }
         }
+        switch (currentWep)
+        {
+            case 0:
+                Primary.SetActive(true);
+                Secondary.SetActive(false);
+                break;
+            case 1:
+                Primary.SetActive(false );
+                Secondary.SetActive(true);
+                break;
+            case 2:
+                Primary.SetActive(true);
+               
+                break;
+            case 3:
+                
+                Secondary.SetActive(true);
+                break;
+            default:
+                break;
+        }
 
-        
+
 
     }
    
@@ -82,12 +110,13 @@ public class PlayerManager : MonoBehaviour
 
     public void Die()
     {
+        
         model.enabled = false;
     }
 
     public void Respawn()
     {
-               
+        
         model.enabled = true;
         SetHealth(maxHealth);
 
@@ -99,5 +128,5 @@ public class PlayerManager : MonoBehaviour
         Flashlight.SetActive(!Flashlight.activeSelf);
     }
 
-
+   
 }

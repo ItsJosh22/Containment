@@ -137,6 +137,9 @@ public class Server
 
                 {(int)ClientPackets.playerFlashLight, ServerHandle.PlayerFlashlight },
                  {(int)ClientPackets.doorInteracted, ServerHandle.DoorInteracted },
+                 {(int)ClientPackets.PlayerPickedupGun, ServerHandle.PlayerPickedupGun },
+                 {(int)ClientPackets.FreeWeapon, ServerHandle.FreeWeapon },
+
 
 
             };

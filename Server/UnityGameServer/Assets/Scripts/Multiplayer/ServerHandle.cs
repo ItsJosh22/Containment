@@ -80,7 +80,21 @@ public class ServerHandle
 
     }
 
+    public static void PlayerPickedupGun(int _fromclient, Packet _packet)
+    {
+        int _wepid = _packet.ReadInt();
+        int _playerId = _packet.ReadInt();
 
+        ServerSend.PlayerPickedupWeapon(_wepid, _playerId);
 
+    }
 
+    public static void FreeWeapon(int _fromclient, Packet _packet)
+    {
+        int _wepid = _packet.ReadInt();
+       
+
+        ServerSend.FreeWeapon(_wepid);
+
+    }
 }

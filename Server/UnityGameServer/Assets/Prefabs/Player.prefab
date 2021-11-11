@@ -148,6 +148,7 @@ MonoBehaviour:
   BulletDamage: 50
   Allpoints: []
   spawnPoint: {fileID: 0}
+  info: {fileID: 0}
   currentWep: 0
   Guns:
   - {fileID: 5361046291266038717}

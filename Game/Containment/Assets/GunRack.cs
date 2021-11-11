@@ -5,14 +5,7 @@ using UnityEngine;
 public class GunRack : MonoBehaviour
 {
 
-    public GameObject Gun;
-
-
-        
-    public void EquipedGun()
-    {
-        Gun.SetActive(false);
-    }
+    WeaponManager[] Allguns;
 
 
 

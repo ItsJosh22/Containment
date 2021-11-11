@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
     public static Dictionary<int, ItemSpawner> itemSpawners = new Dictionary<int, ItemSpawner>();
     public static Dictionary<int, ProjectileManager> projectiles = new Dictionary<int, ProjectileManager>();
     public static Dictionary<int, EnemyManager> enemies = new Dictionary<int, EnemyManager>();
-
+    public static Dictionary<int, WeaponManager> allGuns = new Dictionary<int, WeaponManager>();
     public GameObject localPlayerPrefab;
     public GameObject playerPrefab;
     public GameObject itemSpawnerPrefab;
@@ -77,7 +77,10 @@ public class GameManager : MonoBehaviour
         Instantiate(impact, _pos, _rot);
     }
 
-  
+    public void addGun(WeaponManager _wep,int _id)
+    {
+        allGuns.Add(_id, _wep);
+    }
 
 
 }

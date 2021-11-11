@@ -109,4 +109,27 @@ public class ClientSend : MonoBehaviour
             SendTCPData(_packet);
         }
     }
+
+    public static void PlayerPickedupGun(int _wepid, int _playerid)
+    {
+        using (Packet _packet = new Packet((int)ClientPackets.PlayerPickedupGun))
+        {
+            _packet.Write(_wepid);
+            _packet.Write(_playerid);
+
+            SendTCPData(_packet);
+        }
+    }
+
+    public static void FreeWeapon(int _wepid)
+    {
+        using (Packet _packet = new Packet((int)ClientPackets.FreeWeapon))
+        {
+            _packet.Write(_wepid);
+          
+
+            SendTCPData(_packet);
+        }
+    }
+
 }

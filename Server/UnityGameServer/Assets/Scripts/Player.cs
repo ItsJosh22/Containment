@@ -22,6 +22,8 @@ public class Player : MonoBehaviour
 
     public GameObject[] Allpoints;
     public GameObject spawnPoint;
+    public Guninfo info;
+    
     [Header("Guns")]
     public int currentWep = 1;
     public GameObject[] Guns;
@@ -243,14 +245,14 @@ public class Player : MonoBehaviour
             currentWep -= 1;
         }
 
-        if (currentWep > wepAmount -1)
+        if (currentWep > 0)
         {
             currentWep = 0;
         }
 
         if (currentWep < 0)
         {
-            currentWep = wepAmount-1;
+            currentWep = 1;
         }
         ServerSend.PlayerSwapWeapon(this);
     }

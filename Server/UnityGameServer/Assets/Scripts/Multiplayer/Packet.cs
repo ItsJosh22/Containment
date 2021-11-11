@@ -29,7 +29,10 @@ public enum ServerPackets
     levelChanging,
     ClientLevelChange,
     playerFlashLight,
-    doorInteracted
+    doorInteracted,
+    PlayerPickedupGun,
+    FreeWeapon
+
 
 }
 
@@ -44,7 +47,9 @@ public enum ClientPackets
     playerReloaded,
     changeLevel,
     playerFlashLight,
-    doorInteracted
+    doorInteracted,
+    PlayerPickedupGun,
+    FreeWeapon
 
 }
 
@@ -392,8 +397,7 @@ public class Packet : IDisposable
         return new Quaternion(ReadFloat(_moveReadPos), ReadFloat(_moveReadPos), ReadFloat(_moveReadPos), ReadFloat(_moveReadPos));
     }
 
-
-
+   
     #endregion
 
     private bool disposed = false;

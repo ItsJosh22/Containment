@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 public class GunLogic : MonoBehaviour
 {
+    
     [Header("Stats")]
     [SerializeField] float damage;
     [SerializeField] float delay;

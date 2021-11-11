@@ -310,6 +310,8 @@ public class Client : MonoBehaviour
                   {(int)ServerPackets.ClientLevelChange, ClientHandle.ClientlevelChange },
                   {(int)ServerPackets.playerFlashLight, ClientHandle.PlayerFlashlight },
                   {(int)ServerPackets.doorInteracted, ClientHandle.DoorInteracted },
+                  {(int)ServerPackets.PlayerPickedupGun, ClientHandle.PlayerPickedUpWeapon },
+                       {(int)ServerPackets.FreeWeapon, ClientHandle.FreeWeapon },
 
 
         };

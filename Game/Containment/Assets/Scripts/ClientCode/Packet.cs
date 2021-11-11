@@ -29,7 +29,9 @@ public enum ServerPackets
     levelChanging,
     ClientLevelChange,
     playerFlashLight,
-    doorInteracted
+    doorInteracted,
+    PlayerPickedupGun,
+    FreeWeapon
 
 }
 
@@ -44,7 +46,9 @@ public enum ClientPackets
     playerReloaded,
     changeLevel,
     playerFlashLight,
-    doorInteracted
+    doorInteracted,
+    PlayerPickedupGun,
+    FreeWeapon
 
 }
 

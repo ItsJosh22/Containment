@@ -225,4 +225,21 @@ public class ClientHandle : MonoBehaviour
 
     }
 
+    public static void PlayerPickedUpWeapon(Packet _packet)
+    {
+        int _wepid = _packet.ReadInt();
+        int _playerid = _packet.ReadInt();
+
+        GameManager.allGuns[_wepid].ClientTakeWeapon(GameManager.players[_playerid].gunPos);
+
+    }
+
+    public static void FreeWeapon(Packet _packet)
+    {
+        int _wepid = _packet.ReadInt();
+       
+
+        GameManager.allGuns[_wepid].ReturnWep();
+
+    }
 }

@@ -32,8 +32,24 @@ public class PlayerController : MonoBehaviour
             ClientSend.PlayerSwapWeapon(true);
 
         }
-        pManager.Weapons[pManager.currentWep].GetComponent<GunLogic>().ammocount.text = $"{pManager.Weapons[pManager.currentWep].GetComponent<GunLogic>().bulletsLeft} / {pManager.Weapons[pManager.currentWep].GetComponent<GunLogic>().magSize}";
+        if (pManager.Primary != null)
+        {
+            if (pManager.Primary.activeInHierarchy == true)
+            {
 
+            pManager.Primary.GetComponent<GunLogic>().ammocount.text = $"{pManager.Primary.GetComponent<GunLogic>().bulletsLeft} / {pManager.Primary.GetComponent<GunLogic>().magSize}";
+            }
+
+        }
+        if (pManager.Secondary != null)
+        {
+
+        if (pManager.Secondary.activeInHierarchy == true)
+        {
+            pManager.Secondary.GetComponent<GunLogic>().ammocount.text = $"{pManager.Secondary.GetComponent<GunLogic>().bulletsLeft} / {pManager.Secondary.GetComponent<GunLogic>().magSize}";
+        }
+        }
+        
     }
 
     private void FixedUpdate()
