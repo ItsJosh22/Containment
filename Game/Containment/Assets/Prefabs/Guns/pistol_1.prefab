@@ -198,15 +198,16 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4600266719100662982}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fc173e14b3639af4dbb11f49a2e8036b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startpos: {x: 0, y: 0, z: 0}
-  startRot: {x: 0, y: 0, z: 0, w: 0}
+  wepId: 0
+  GunName: 
   logic: {fileID: 4600266719100662983}
   slot: 0
+  rack: {fileID: 0}
   taken: 0
   playerId: 0
 --- !u!65 &4600266719100662985

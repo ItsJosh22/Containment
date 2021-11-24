@@ -230,7 +230,7 @@ public class ClientHandle : MonoBehaviour
         int _wepid = _packet.ReadInt();
         int _playerid = _packet.ReadInt();
 
-        GameManager.allGuns[_wepid].ClientTakeWeapon(GameManager.players[_playerid].gunPos);
+       // GameManager.allGuns[_wepid].ClientTakeWeapon(GameManager.players[_playerid].gunPos);
 
     }
 
@@ -239,7 +239,7 @@ public class ClientHandle : MonoBehaviour
         int _wepid = _packet.ReadInt();
        
 
-        GameManager.allGuns[_wepid].ReturnWep();
+       // GameManager.allGuns[_wepid].ReturnWep();
 
     }
 }

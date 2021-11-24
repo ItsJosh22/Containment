@@ -32,18 +32,19 @@ public class GunLogic : MonoBehaviour
     public GameObject bulletMark;
     public Text ammocount;
     public Image ReloadUI;
-   
+
     private void Awake()
     {
         bulletsLeft = magSize;
         canBeShot = true;
-        ammocount.text = $"{bulletsLeft} / {magSize}";
+        
+        // ammocount.text = $"{bulletsLeft} / {magSize}";
     }
 
     private void Update()
     {
         Inputs();
-        
+
 
         //Add ui that sets mag size
 
@@ -51,7 +52,7 @@ public class GunLogic : MonoBehaviour
 
 
 
-    void Inputs()
+    public void Inputs()
     {
         if (allowButtonHold)
         {
@@ -62,23 +63,37 @@ public class GunLogic : MonoBehaviour
             shooting = Input.GetKeyDown(KeyCode.Mouse0);
         }
 
-        if (Input.GetKeyDown(KeyCode.R) && bulletsLeft < magSize && !reloading && Cursor.lockState == CursorLockMode.Locked)
-        {
-            Reload();
-            ClientSend.PlayerReloaded();
-        }
 
         if (canBeShot && shooting && !reloading && bulletsLeft > 0 && Cursor.lockState == CursorLockMode.Locked)
         {
             bulletsShot = bulletsPerPress;
             Shoot();
-            ClientSend.PlayerShoot(Viewpoint.transform.forward,bulletsPerPress);
+            // ClientSend.PlayerShoot(Viewpoint.transform.forward, bulletsPerPress);
         }
+        //if (Input.GetKeyDown(KeyCode.R) && bulletsLeft < magSize && !reloading && Cursor.lockState == CursorLockMode.Locked)
+        //{
+        //    Reload();
+        //    ClientSend.PlayerReloaded();
+        //}
 
-        if (Input.GetKeyDown(KeyCode.V))
+        //if (Input.GetKeyDown(KeyCode.V))
+        //{
+        //    allowButtonHold = !allowButtonHold;
+        //}
+    }
+
+    public void GunFire()
+    {
+        if (canBeShot && shooting && !reloading && bulletsLeft > 0 && Cursor.lockState == CursorLockMode.Locked)
         {
-            allowButtonHold = !allowButtonHold;
+            bulletsShot = bulletsPerPress;
+            Shoot();
         }
+    }
+
+    public void SwapFireMode()
+    {
+        allowButtonHold = !allowButtonHold;
     }
 
     void Shoot()
@@ -90,18 +105,31 @@ public class GunLogic : MonoBehaviour
         Vector3 direction = Viewpoint.transform.forward + new Vector3(y, y, x);
 
 
+        if (Physics.Raycast(Viewpoint.transform.position, direction, out hit, range))
+        {
+
+
+            if (hit.collider.CompareTag("Player"))
+            {
+                if (hit.collider.GetComponent<Player>().islocal == false)
+                {
+                    hit.collider.GetComponent<Player>().TakeDamage(damage);
+
+                }
+            }
+        }
+
         // Used only for debug
-        Physics.Raycast(Viewpoint.transform.position, direction, out hit, range);
-        Debug.DrawLine(Viewpoint.transform.position, hit.point, Color.red,1000);
-       
-        
+        Debug.DrawLine(Viewpoint.transform.position, hit.point, Color.red, 1000);
+
+
         // get object normal and make it face that
         // Instantiate(bulletMark, hit.point, Quaternion.Euler(0, 180, 0));
         // Instantiate(muzzleFlash, bulletOrigin.position,Quaternion.identity);
 
         bulletsLeft--;
         bulletsShot--;
-        ammocount.text = $"{bulletsLeft} / {magSize}";
+        //     ammocount.text = $"{bulletsLeft} / {magSize}";
         Invoke("ResetShot", delay);
 
         if (bulletsShot > 0 && bulletsLeft > 0)
@@ -117,6 +145,7 @@ public class GunLogic : MonoBehaviour
         canBeShot = true;
     }
 
+
     void Reload()
     {
         reloading = true;
@@ -126,9 +155,18 @@ public class GunLogic : MonoBehaviour
     {
         bulletsLeft = magSize;
         reloading = false;
-        ammocount.text = $"{bulletsLeft} / {magSize}";
+        // ammocount.text = $"{bulletsLeft} / {magSize}";
     }
 
-   
+    public void GunReload()
+    {
+        if (bulletsLeft < magSize && !reloading && Cursor.lockState == CursorLockMode.Locked)
+        {
+            Reload();
+
+        }
+
+    }
+
 
 }

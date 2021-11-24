@@ -31,7 +31,7 @@ public class PlayerManager : MonoBehaviour
         Health = maxHealth;
         
        
-        if (GetComponent<PlayerController>() == true)
+        if (GetComponent<OldPlayerController>() == true)
         {
             isLocal = true;
             
