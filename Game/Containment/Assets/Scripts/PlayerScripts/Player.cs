@@ -1,17 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Mirror;
 
-public class Player
-    : MonoBehaviour
+public class Player : NetworkBehaviour
 {
     //private bool[] inputs;
+
+    public Transform[] Guns;
+
+    public int CurrentWeapon = 0;
+
+
+
     [Header("PlayerInfo")]
     public int id;
     public string username;
     public bool islocal;
     [Header("Health")]
-    public float curHealth;
+  [SyncVar]  public float curHealth;
     public float maxHealth = 100f;
 
     [Header("Movement")]
@@ -28,7 +35,7 @@ public class Player
 
     [Header("Shoot Origin")]
     public Transform shootOrigin;
-  
+
 
     [Header("Flashlight")]
     public GameObject Flashlight;
@@ -53,11 +60,16 @@ public class Player
         gravity *= Time.fixedDeltaTime * Time.fixedDeltaTime;
         moveSpeed *= Time.fixedDeltaTime;
         jumpspeed *= Time.fixedDeltaTime;
+        UpdateWeapons();
     }
 
 
     public void FixedUpdate()
     {
+        if (!isLocalPlayer)
+        {
+            return;
+        }
 
         if (curHealth <= 0f)
         {
@@ -117,13 +129,30 @@ public class Player
         //Scroll Up
         if (Input.mouseScrollDelta.y > 0)
         {
-            
-            Weapons.SwapUp();
+            if (CurrentWeapon >= Guns.Length - 1)
+            {
+                CurrentWeapon = 0;
+            }
+            else
+            {
+                CurrentWeapon++;
+            }
+            UpdateWeapons();
+            // Weapons.SwapUp();
         }
         //Scroll Down
         if (Input.mouseScrollDelta.y < 0)
         {
-            Weapons.SwapDown();
+            if (CurrentWeapon <= 0)
+            {
+                CurrentWeapon = Guns.Length - 1;
+            }
+            else
+            {
+                CurrentWeapon--;
+            }
+            UpdateWeapons();
+            //Weapons.SwapDown();
         }
         //Change WeaponMode
         if (Input.GetKeyDown(KeyCode.V))
@@ -139,18 +168,25 @@ public class Player
             {
                 if (hit.collider.CompareTag("Weapon"))
                 {
+                    
                     Weapons.EquipWeapon(hit.collider.gameObject);
-
+                   
                 }
             }
-            
+
         }
-        
+
         if (Input.GetKeyDown(KeyCode.F))
         {
             Flashlight.SetActive(!Flashlight.activeSelf);
         }
 
+    }
+
+    [Command]
+    private void test()
+    {
+        Debug.LogError("test");
     }
 
     private void Move(Vector2 _inputDirection)
@@ -232,6 +268,61 @@ public class Player
         controller.enabled = true;
         // ServerSend.PlayerRespawned(this);
     }
+
+
+
+    void UpdateWeapons()
+    {
+        //int i = 0;
+        //foreach (Transform wep in Guns)
+        //{
+        //    if (i == CurrentWeapon)
+        //    {
+        //        wep.gameObject.SetActive(true);
+        //    }
+        //    else
+        //    {
+        //        wep.gameObject.SetActive(false);
+        //    }
+        //    i++;
+        //}
+
+        if (isServer)
+        {
+            RpcUpdateWeapons();
+        }
+        else
+        {
+            cmdUpdateWeapons();
+
+        }
+    }
+
+    [Command]
+    public void cmdUpdateWeapons()
+    {
+        RpcUpdateWeapons();
+    }
+
+
+    [ClientRpc]
+    public void RpcUpdateWeapons()
+    {
+        int i = 0;
+        foreach (Transform wep in Guns)
+        {
+            if (i == CurrentWeapon)
+            {
+                wep.gameObject.SetActive(true);
+            }
+            else
+            {
+                wep.gameObject.SetActive(false);
+            }
+            i++;
+        }
+    }
+
 
 
 }

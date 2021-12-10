@@ -2,7 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-public class GunLogic : MonoBehaviour
+using Mirror;
+public class GunLogic : NetworkBehaviour
 {
     
     [Header("Stats")]
@@ -14,7 +15,7 @@ public class GunLogic : MonoBehaviour
     [SerializeField] float rateOfFire;
     public int magSize;
     [SerializeField] int bulletsPerPress;
-    public int bulletsLeft;
+    [SyncVar] public int bulletsLeft;
     int bulletsShot;
 
     public bool allowButtonHold;
@@ -27,6 +28,7 @@ public class GunLogic : MonoBehaviour
     public RaycastHit hit;
     public LayerMask Enemy;
 
+    public Player player;
     [Header("GameObjects")]
     public GameObject muzzleFlash;
     public GameObject bulletMark;
@@ -54,6 +56,15 @@ public class GunLogic : MonoBehaviour
 
     public void Inputs()
     {
+        if (player == null)
+        {
+            return;
+        }
+
+        if (!player.isLocalPlayer)
+        {
+            return;
+        }
         if (allowButtonHold)
         {
             shooting = Input.GetKey(KeyCode.Mouse0);
@@ -96,6 +107,7 @@ public class GunLogic : MonoBehaviour
         allowButtonHold = !allowButtonHold;
     }
 
+  
     void Shoot()
     {
         canBeShot = false;
@@ -124,7 +136,8 @@ public class GunLogic : MonoBehaviour
 
 
         // get object normal and make it face that
-        // Instantiate(bulletMark, hit.point, Quaternion.Euler(0, 180, 0));
+        GameObject bullet = Instantiate(bulletMark, hit.point, Quaternion.Euler(0, 180, 0));
+        //NetworkServer.Spawn(bullet);
         // Instantiate(muzzleFlash, bulletOrigin.position,Quaternion.identity);
 
         bulletsLeft--;
@@ -137,8 +150,17 @@ public class GunLogic : MonoBehaviour
             Invoke("Shoot", rateOfFire);
         }
 
-
+        mshoot(direction);
     }
+
+    [Command]
+    void mshoot(Vector3 vec)
+    {
+        GameObject bullet = Instantiate(bulletMark, hit.point, Quaternion.Euler(0, 180, 0));
+        NetworkServer.Spawn(bullet);
+    }
+
+
 
     void ResetShot()
     {

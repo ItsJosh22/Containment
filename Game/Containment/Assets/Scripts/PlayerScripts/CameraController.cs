@@ -2,9 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class CameraController : MonoBehaviour
 {
-    public Player player;
+    public PlayerScript player;
+    public Camera cam;
     public float sensitivity = 100;
     public float clampangle = 85;
 
@@ -13,6 +15,7 @@ public class CameraController : MonoBehaviour
 
     private void Start()
     {
+        
         verticalRotation = transform.localEulerAngles.x;
         horizontalRotation = player.transform.eulerAngles.y;
         ToggleCursorMode();
@@ -20,16 +23,20 @@ public class CameraController : MonoBehaviour
 
     private void Update()
     {
+        if (!player.isLocalPlayer)
+        {
+            return;
+        }
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-          //  ToggleCursorMode();
+            ToggleCursorMode();
         }
         if (Cursor.lockState == CursorLockMode.Locked)
         {
         Look();
 
         }
-        Debug.DrawRay(transform.position, transform.forward * 2, Color.green);
+       // Debug.DrawRay(transform.position, transform.forward * 2, Color.green);
     }
 
     private void Look()

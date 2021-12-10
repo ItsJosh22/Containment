@@ -14,10 +14,16 @@ public class WeaponManager : MonoBehaviour
     public Transform Returnpoint;
 
 
+    public void  Dequip()
+    {
+
+    }
+    public void Equip()
+    {
+
+    }
 
 
-
-   
 
 
 }
