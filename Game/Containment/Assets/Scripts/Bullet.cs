@@ -2,8 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
+using UnityEngine.VFX;
 public class Bullet : NetworkBehaviour
 {
+    public VisualEffect v;
     public Rigidbody rb;
     public GameObject explosion;
     public LayerMask whoCanDamage;
@@ -23,7 +25,7 @@ public class Bullet : NetworkBehaviour
     PhysicMaterial physics_mat;
 
     Destroy dd;
-
+    Vector3 temp;
     private void Start()
     {
         SetUp();
@@ -43,11 +45,21 @@ public class Bullet : NetworkBehaviour
 
     }
 
+    private void OnDestroy()
+    {
+       VisualEffect t = Instantiate(v, transform.position, Quaternion.identity);
+        t.transform.up = temp;
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
         collisons++;
+        
+        temp = collision.GetContact(0).normal;
         if (collision.collider.CompareTag("Enemy") && explodeOnTouch)
         {
+            //collision.GetContact(0).normal
+
             Explode();
         }
     }
@@ -55,17 +67,19 @@ public class Bullet : NetworkBehaviour
     
     void Explode()
     {
-        Debug.Log("2");
-        if (explosion != null)
+       
+        if (v != null)
         {
-            Instantiate(explosion, transform.position, Quaternion.identity);
+            
+            //Instantiate(explosion, transform.position, Quaternion.identity);
         }
         Collider[] enemies = Physics.OverlapSphere(transform.position, explosionRange, whoCanDamage);
         for (int i = 0; i < enemies.Length; i++)
         {
             //enemies[i].getcompoent<enemys or what everScrip>().TakeDamage(explosionDamage);
         }
-        Invoke("delay", 0.05f);
+        delay();
+        //Invoke("delay", 0.05f);
     }
     void delay()
     {

@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.VFX;
 public class WeaponSS : MonoBehaviour
 {
     public int Slot;
@@ -25,7 +25,7 @@ public class WeaponSS : MonoBehaviour
     public bool reloading;
     public Transform muzzle;
 
-   
+    public VisualEffect v;
 
 
 

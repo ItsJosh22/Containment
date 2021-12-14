@@ -51,8 +51,8 @@ MonoBehaviour:
   runInBackground: 1
   autoStartServerBuild: 1
   serverTickRate: 30
-  offlineScene: Assets/NewStuff/Menu.unity
-  onlineScene: Assets/NewStuff/Level1.unity
+  offlineScene: Assets/Scenes/GameList.unity
+  onlineScene: Assets/Scenes/Level1.unity
   transport: {fileID: 1833375056461858220}
   networkAddress: localhost
   maxConnections: 4

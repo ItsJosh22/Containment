@@ -310,17 +310,18 @@ public class PlayerScript : NetworkBehaviour
     {
         activeWeapon.readytoshoot = false;
         Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
+       
         RaycastHit hit;
         Vector3 targetPoint;
-        if (Physics.Raycast(ray, out hit))
-        {
-            targetPoint = hit.point;
-        }
-        else
-        {
+        //if (Physics.Raycast(ray, out hit))
+        //{
+        //    targetPoint = hit.point;
+        //}
+        //else
+        //{
             targetPoint = ray.GetPoint(75);
-        }
-
+        //}
+       
         Vector3 noSpread = targetPoint - activeWeapon.muzzle.position;
         float x = Random.Range(-activeWeapon.Spread, activeWeapon.Spread);
         float y = Random.Range(-activeWeapon.Spread, activeWeapon.Spread);
@@ -387,10 +388,11 @@ public class PlayerScript : NetworkBehaviour
     void RpcFireWeapon()
     {
         //bulletAudio.Play(); muzzleflash  etc
-
-        if (activeWeapon.muzzleFlash != null)
+        
+        if (activeWeapon.v != null)
         {
-            Instantiate(activeWeapon.muzzleFlash, activeWeapon.muzzle.position, Quaternion.identity);
+            activeWeapon.v.Play();
+            //Instantiate(activeWeapon.muzzleFlash, activeWeapon.muzzle.position, Quaternion.identity);
         }
 
         GameObject bullet = Instantiate(activeWeapon.bullet, activeWeapon.muzzle.position, Quaternion.identity);
@@ -410,7 +412,7 @@ public class PlayerScript : NetworkBehaviour
         //enable new
         if (0 < _new && _new < wepArray.Length && wepArray[_new] != null)
         {
-            Debug.Log(_new);  
+            
                 wepArray[_new].SetActive(true);
                 activeWeapon = wepArray[activeWeaponSynced].GetComponent<WeaponSS>();
                 if (isLocalPlayer)
