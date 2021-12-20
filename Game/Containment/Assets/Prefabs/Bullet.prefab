@@ -151,10 +151,10 @@ MonoBehaviour:
   whoCanDamage:
     serializedVersion: 2
     m_Bits: 0
-  bounce: 0
+  bounce: 1
   useGravity: 0
   explosionDamage: 40
   explosionRange: 0.15
-  maxCollisions: 0
+  maxCollisions: 10
   maxLifeTime: 3
   explodeOnTouch: 1
