@@ -53,6 +53,10 @@ public class Bullet : NetworkBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        if (collision.collider.CompareTag("bullet"))
+        {
+            return;
+        }
         collisons++;
         
         temp = collision.GetContact(0).normal;

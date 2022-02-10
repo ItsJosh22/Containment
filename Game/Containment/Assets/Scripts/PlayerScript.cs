@@ -51,6 +51,7 @@ public class PlayerScript : NetworkBehaviour
 
     private void Awake()
     {
+        PlayerList.Instance.Addplayer(this);
         sceneScript = GameObject.Find("SceneReference").GetComponent<SceneReference>().sceneScript;
         foreach (var item in wepArray)
         {
@@ -377,6 +378,7 @@ public class PlayerScript : NetworkBehaviour
     {
         activeWeapon.bulletsLeft = activeWeapon.magSize;
         activeWeapon.reloading = false;
+        sceneScript.UIAmmo($"{activeWeapon.bulletsLeft / activeWeapon.bulletsPerTap} / {activeWeapon.magSize / activeWeapon.bulletsPerTap}");
     }
     [Command]
     void CmdShootRay()
@@ -456,4 +458,17 @@ public class PlayerScript : NetworkBehaviour
     }
 
     #endregion otherStuff
+
+    //public override void Teleport(Transform fromPortal, Transform toPortal, Vector3 pos, Quaternion rot)
+    //{
+    //    transform.position = pos;
+    //    //Vector3 eulerRot = rot.eulerAngles;
+    //    //float delta = Mathf.DeltaAngle(smoothYaw, eulerRot.y);
+    //    //yaw += delta;
+    //    //smoothYaw += delta;
+    //    //transform.eulerAngles = Vector3.up * smoothYaw;
+    //    //velocity = toPortal.TransformVector(fromPortal.InverseTransformVector(velocity));
+    //    //Physics.SyncTransforms();
+    //}
+
 }

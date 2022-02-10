@@ -13,6 +13,14 @@ public class CameraController : MonoBehaviour
     private float verticalRotation;
     private float horizontalRotation;
 
+    Portal[] portals;
+
+    void Awake()
+    {
+        portals = FindObjectsOfType<Portal>();
+    }
+
+
     private void Start()
     {
         
@@ -23,10 +31,10 @@ public class CameraController : MonoBehaviour
 
     private void Update()
     {
-        if (!player.isLocalPlayer)
-        {
-            return;
-        }
+        //if (!player.isLocalPlayer)
+        //{
+        //    return;
+        //}
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             ToggleCursorMode();
@@ -68,5 +76,23 @@ public class CameraController : MonoBehaviour
     }
 
 
+    void LateUpdate()
+    {
+
+        for (int i = 0; i < portals.Length; i++)
+        {
+            portals[i].PrePortalRender();
+        }
+        for (int i = 0; i < portals.Length; i++)
+        {
+            portals[i].Render();
+        }
+
+        for (int i = 0; i < portals.Length; i++)
+        {
+            portals[i].PostPortalRender();
+        }
+
+    }
 
 }
