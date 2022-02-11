@@ -193,6 +193,7 @@ GameObject:
   - component: {fileID: 4656678422760600601}
   - component: {fileID: 5104536732499420450}
   - component: {fileID: 7299848006226167288}
+  - component: {fileID: -3695104242182811706}
   m_Layer: 0
   m_Name: Player2
   m_TagString: Untagged
@@ -237,11 +238,12 @@ MonoBehaviour:
   playerColor: {r: 0, g: 0, b: 0, a: 0}
   floatingInfo: {fileID: 2904091581350891626}
   controller: {fileID: 8910883074344896361}
-  gravity: -0.005
-  jumpspeed: 0.1
-  moveSpeed: 0.07
+  walkSpeed: 4
+  jumpForce: 8
+  gravity: 18
   yVelo: 0
   running: 0
+  smoothMoveTime: 0.15
   activeWeaponSynced: 0
   wepArray:
   - {fileID: 0}
@@ -381,6 +383,24 @@ MonoBehaviour:
   syncInterval: 0.1
   clientAuthority: 1
   animator: {fileID: 1420422934}
+--- !u!114 &-3695104242182811706
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8905543749830590943}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ca6439d9b28b464aa681019da44ea97, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  graphicsObject: {fileID: 919132149155446097, guid: f46af3c1977c571448684ff0c7ed63e5, type: 3}
+  mouseSensitivity: 10
+  pitchMinMax: {x: -85, y: 85}
+  rotationSmoothTime: 0.1
+  yaw: 5.187398
+  pitch: 0.5499961
 --- !u!1 &9027797213933817484
 GameObject:
   m_ObjectHideFlags: 0

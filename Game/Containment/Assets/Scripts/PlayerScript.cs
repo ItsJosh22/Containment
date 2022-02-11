@@ -21,11 +21,20 @@ public class PlayerScript : NetworkBehaviour
 
     [Header("Movement")]
     public CharacterController controller;
-    public float gravity = -9.81f;
-    public float jumpspeed = 5f;
-    public float moveSpeed = 5f;
+    public float walkSpeed = 5f;
+    public float jumpForce = 10f;
+    public float gravity = 18f;
     public float yVelo = 0;
     public bool running = false;
+    public float smoothMoveTime = 0.1f;
+    Camera cam;
+    float verticalVelocity;
+    Vector3 velocity;
+    Vector3 smoothV;
+    bool jumping;
+    float lastGroundedTime;
+
+
 
     [Header("Weapons")]
     [SyncVar(hook = nameof(OnWeaponChanged))]
@@ -75,19 +84,25 @@ public class PlayerScript : NetworkBehaviour
 
     public override void OnStartLocalPlayer()
     {
+        cam = Camera.main;
         PlayerModel.layer = 1;
         SetLayerRecursively(PlayerModel, 1);
         sceneScript.playerScript = this;
-        Camera.main.transform.SetParent(transform);
-        Camera.main.transform.localPosition = new Vector3(0, 0.6f, 0);
-        Camera.main.GetComponent<CameraController>().player = this;
-        Gunorigins.SetParent(Camera.main.transform);
+
+        //camera
+        cam.transform.SetParent(transform);
+        cam.transform.localPosition = new Vector3(0, 0.6f, 0);
+        cam.GetComponent<CameraController>().player = this;
+        
+        Gunorigins.SetParent(cam.transform);
         floatingInfo.transform.localPosition = new Vector3(0, 0.3f, 0.6f);
         floatingInfo.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
 
         string name = "Player" + Random.Range(100, 999);
         Color color = new Color(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f));
         cmdSetupPlayer(name, color);
+
+       
     }
 
     void SetLayerRecursively(GameObject obj, int newLayer)
@@ -134,42 +149,46 @@ public class PlayerScript : NetworkBehaviour
         ani.SetBool("Walking", false);
         ani.SetBool("Backwards", false);
         ani.SetBool("Running", false);
-        Vector2 _inputDirection = Vector2.zero;
-        // Normal Movement
+        Move();
+
+
+
+
+
         if (Input.GetKey(KeyCode.W))
         {
             ani.SetBool("Walking", true);
-            _inputDirection.y += 1;
+            
         }
         if (Input.GetKey(KeyCode.S))
         {
             ani.SetBool("Backwards", true);
-            _inputDirection.y -= 1;
+            
         }
         if (Input.GetKey(KeyCode.A))
         {
             ani.SetBool("Walking", true);
-            _inputDirection.x -= 1;
+            
         }
         if (Input.GetKey(KeyCode.D))
         {
 
             ani.SetBool("Walking", true);
-            _inputDirection.x += 1;
+            
         }
 
         //Running input
         if (Input.GetKey(KeyCode.LeftShift))
         {
             ani.SetBool("Running", true);
-            running = true;
+           
         }
-        else
-        {
-            running = false;
-        }
+        
 
-        Move(_inputDirection);
+       
+
+
+
 
         #endregion Movement
 
@@ -252,31 +271,65 @@ public class PlayerScript : NetworkBehaviour
 
     }
 
-    private void Move(Vector2 _inputDirection)
+    private void Move()
     {
-        Vector3 _moveDirection = transform.right * _inputDirection.x + transform.forward * _inputDirection.y;
-        //Running      
-        if (running)
+        Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+
+        Vector3 inputDir = new Vector3(input.x, 0, input.y).normalized;
+        Vector3 worldInputDir = transform.TransformDirection(inputDir);
+
+        float currentSpeed = (Input.GetKey(KeyCode.LeftShift)) ? (walkSpeed * 2) : walkSpeed;
+        Vector3 targetVelocity = worldInputDir * currentSpeed;
+        velocity = Vector3.SmoothDamp(velocity, targetVelocity, ref smoothV, smoothMoveTime);
+
+        verticalVelocity -= gravity * Time.deltaTime;
+        velocity = new Vector3(velocity.x, verticalVelocity, velocity.z);
+
+        var flags = controller.Move(velocity * Time.deltaTime);
+        if (flags == CollisionFlags.Below)
         {
-            _moveDirection *= (moveSpeed * 2);
-        }
-        else
-        {
-            _moveDirection *= moveSpeed;
+            jumping = false;
+            lastGroundedTime = Time.time;
+            verticalVelocity = 0;
         }
 
-        if (controller.isGrounded)
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            yVelo = 0f;
-            // JUMP BUTTON
-            if (Input.GetKey(KeyCode.Space))
+            float timeSinceLastTouchedGround = Time.time - lastGroundedTime;
+            if (controller.isGrounded || (!jumping && timeSinceLastTouchedGround < 0.15f))
             {
-                yVelo = jumpspeed;
+                jumping = true;
+                verticalVelocity = jumpForce;
             }
         }
-        yVelo += gravity;
-        _moveDirection.y = yVelo;
-        controller.Move(_moveDirection);
+
+       
+
+  
+
+        //Vector3 _moveDirection = transform.right * _inputDirection.x + transform.forward * _inputDirection.y;
+        ////Running      
+        //if (running)
+        //{
+        //    _moveDirection *= (moveSpeed * 2);
+        //}
+        //else
+        //{
+        //    _moveDirection *= moveSpeed;
+        //}
+
+        //if (controller.isGrounded)
+        //{
+        //    yVelo = 0f;
+        //    // JUMP BUTTON
+        //    if (Input.GetKey(KeyCode.Space))
+        //    {
+        //        yVelo = jumpspeed;
+        //    }
+        //}
+        //yVelo += gravity;
+        //_moveDirection.y = yVelo;
+        //controller.Move(_moveDirection);
 
     }
 
@@ -459,16 +512,6 @@ public class PlayerScript : NetworkBehaviour
 
     #endregion otherStuff
 
-    //public override void Teleport(Transform fromPortal, Transform toPortal, Vector3 pos, Quaternion rot)
-    //{
-    //    transform.position = pos;
-    //    //Vector3 eulerRot = rot.eulerAngles;
-    //    //float delta = Mathf.DeltaAngle(smoothYaw, eulerRot.y);
-    //    //yaw += delta;
-    //    //smoothYaw += delta;
-    //    //transform.eulerAngles = Vector3.up * smoothYaw;
-    //    //velocity = toPortal.TransformVector(fromPortal.InverseTransformVector(velocity));
-    //    //Physics.SyncTransforms();
-    //}
+   
 
 }
