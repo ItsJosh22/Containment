@@ -19,6 +19,9 @@ public class PlayerScript : NetworkBehaviour
 
     public GameObject floatingInfo;
 
+    public float health = 100;
+
+
     [Header("Movement")]
     public CharacterController controller;
     public float walkSpeed = 5f;
@@ -512,6 +515,25 @@ public class PlayerScript : NetworkBehaviour
 
     #endregion otherStuff
 
-   
+    
+ 
+
+    [Command]
+    public void cmdTakeDamge(float f)
+    {
+        rpcTakeDamge(f);
+    }
+
+    [ClientRpc]
+    public void rpcTakeDamge(float f)
+    {
+        health -= f;
+    }
+
+    public override void OnStopClient()
+    {
+        PlayerList.Instance.Removeplayer(this);
+        base.OnStopClient();
+    }
 
 }

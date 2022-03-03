@@ -196,7 +196,7 @@ GameObject:
   - component: {fileID: -3695104242182811706}
   m_Layer: 0
   m_Name: Player2
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -237,6 +237,7 @@ MonoBehaviour:
   playerNameText: {fileID: 3059746588093342433}
   playerColor: {r: 0, g: 0, b: 0, a: 0}
   floatingInfo: {fileID: 2904091581350891626}
+  health: 100
   controller: {fileID: 8910883074344896361}
   walkSpeed: 4
   jumpForce: 8

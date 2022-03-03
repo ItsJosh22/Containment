@@ -31,4 +31,21 @@ public class PlayerList : NetworkBehaviour
         players.Add(t);
     }
 
+
+    public void Removeplayer(PlayerScript t)
+    {
+        players.Remove(t);
+        commandRemoveplayer(t);
+    }
+    [Command]
+    public void commandRemoveplayer(PlayerScript t)
+    {
+        rpcRemoveplayer(t);
+    }
+    [ClientRpc]
+    public void rpcRemoveplayer(PlayerScript t)
+    {
+        players.Remove(t);
+    }
+
 }

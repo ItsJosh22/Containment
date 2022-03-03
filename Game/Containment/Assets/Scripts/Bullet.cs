@@ -53,7 +53,7 @@ public class Bullet : NetworkBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.collider.CompareTag("bullet"))
+        if (collision.collider.CompareTag("bullet") || collision.collider.CompareTag("Portal"))
         {
             return;
         }
@@ -62,7 +62,7 @@ public class Bullet : NetworkBehaviour
         temp = collision.GetContact(0).normal;
         if (collision.collider.CompareTag("Enemy") && explodeOnTouch)
         {
-            //collision.GetContact(0).normal
+            collision.collider.GetComponent<BaseEnemy>().TakeDamage(explosionDamage);
 
             Explode();
         }
@@ -81,6 +81,7 @@ public class Bullet : NetworkBehaviour
         for (int i = 0; i < enemies.Length; i++)
         {
             //enemies[i].getcompoent<enemys or what everScrip>().TakeDamage(explosionDamage);
+            //enemies[i].GetComponent<Sleeper>().TakeDamage(explosionDamage);
         }
         delay();
         //Invoke("delay", 0.05f);
